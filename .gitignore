@@ -1,0 +1,26 @@
+# Maven #
+target/
+_site/
+
+# IDEA #
+.git/
+.idea/
+*.iml
+src/log/
+
+# Eclipse #
+.settings/
+.metadata/
+.classpath
+.project
+Servers/
+
+# ignore generator files
+temp
+ftp.properties
+mdm.txt
+mdm_files.txt
+v5.txt
+v5_files.txt
+
+
