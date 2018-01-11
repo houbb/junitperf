@@ -1,4 +1,4 @@
-package com.github.houbb.junitperf.annotation;
+package com.github.houbb.junitperf.core.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -22,21 +22,21 @@ public @interface JunitPerfRequire {
      * 1. 最快的运行耗时如果高于这个值，则视为失败
      * @return 最佳的运行耗时
      */
-    long min() default 0L;
+    float min() default -1L;
 
     /**
      * 最坏的运行耗时(单位：毫秒)
      * 1. 最坏的运行耗时如果高于这个值，则视为失败
      * @return 最坏的运行耗时
      */
-    long max() default 0L;
+    float max() default -1L;
 
     /**
      * 平均的运行耗时(单位：毫秒)
      * 1. 平均的运行耗时如果高于这个值，则视为失败
      * @return 平均的运行耗时
      */
-    long average() default 0L;
+    float average() default -1L;
 
     /**
      * 对于执行耗时的限定

@@ -1,4 +1,4 @@
-package com.github.houbb.junitperf.annotation;
+package com.github.houbb.junitperf.core.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,21 +7,14 @@ import java.lang.annotation.Target;
 
 /**
  * 执行接口
- * 对于每一个测试方法的条件限制
+ * 对于每一个测试方法的条件配置
  * @author bbhou
  * @version 1.0.0
  * @since 1.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
-public @interface JunitPerfTest {
-
-    /**
-     * 测试执行次数
-     * 默认执行一次
-     * @return int val
-     */
-    int times() default 1;
+public @interface JunitPerfConfig {
 
     /**
      * 执行时使用多少线程执行

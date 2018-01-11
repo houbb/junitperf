@@ -22,12 +22,14 @@
 
         <!--============================== MAIN ==============================-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.compiler.level>1.8</project.compiler.level>
+        <project.compiler.level>1.7</project.compiler.level>
 
         <!--============================== INTER ==============================-->
         <log-integration.version>1.0.0</log-integration.version>
+        <paradise.version>1.1.1</paradise.version>
 
         <!--============================== OTHER ==============================-->
+        <commons-math3.version>3.6.1</commons-math3.version>
         <junit.version>4.12</junit.version>
     </properties>
 
@@ -42,15 +44,37 @@
                 <groupId>com.github.houbb</groupId>
                 <artifactId>log-integration</artifactId>
                 <version>${log-integration.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>paradise-common</artifactId>
+                <version>${paradise.version}</version>
+                <optional>true</optional>
             </dependency>
 
 
             <!--============================== OTHER ==============================-->
             <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-math3</artifactId>
+                <version>${commons-math3.version}</version>
+                <optional>true</optional>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>21.0</version>
+                <optional>true</optional>
+            </dependency>
+
+            <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
-                <scope>test</scope>
+                <optional>true</optional>
             </dependency>
 
         </dependencies>
@@ -64,8 +88,23 @@
             <artifactId>log-integration</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.houbb</groupId>
+            <artifactId>paradise-common</artifactId>
+        </dependency>
+
 
         <!--============================== OTHER ==============================-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
