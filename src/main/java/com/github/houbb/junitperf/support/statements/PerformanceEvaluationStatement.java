@@ -32,11 +32,11 @@ public class PerformanceEvaluationStatement extends Statement {
 
     /**
      * 性能测试接口定义
-     * @param evaluationContext
-     * @param statement
-     * @param statisticsCalculator
-     * @param reporterSet
-     * @param evaluationContextSet
+     * @param evaluationContext 上下文
+     * @param statement junit
+     * @param statisticsCalculator 统计
+     * @param reporterSet 报告方式
+     * @param evaluationContextSet 上下文
      */
     public PerformanceEvaluationStatement(EvaluationContext evaluationContext,
                                           Statement statement,
@@ -66,33 +66,26 @@ public class PerformanceEvaluationStatement extends Statement {
             }
 
             Thread.sleep(evaluationContext.getConfigDuration());
-        } catch (InterruptedException e) {
+        } finally {
+            //todo:这个打断存在BUG
+            //具体详情，当执行打断时，被打断的任务可能已经开始执行(尚未执行完)，会出现主线程往下走，被打断的线程也在继续走的情况
             for(Thread thread : threadList) {
-                thread.isInterrupted();
+                thread.interrupt();
             }
         }
 
         evaluationContext.setStatisticsCalculator(statisticsCalculator);
         evaluationContext.runValidation();
         generateReportor();
-        assertThresholdsMet();
     }
 
     /**
      * 报告生成
      */
-    private void generateReportor() {
+    private synchronized void generateReportor() {
         for(Reporter reporter : reporterSet) {
             reporter.report(evaluationContextSet);
         }
-    }
-
-    /**
-     * 断言满足阈值
-     */
-    private void assertThresholdsMet() {
-        //1. per second
-        //2. percents
     }
 
 }

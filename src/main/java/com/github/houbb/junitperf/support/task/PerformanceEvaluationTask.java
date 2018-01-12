@@ -13,10 +13,19 @@ import static java.lang.System.nanoTime;
  */
 public class PerformanceEvaluationTask implements Runnable {
 
+    /**
+     * 热身时间
+     */
     private long warmUpNs;
 
+    /**
+     * junit statement
+     */
     private final Statement statement;
 
+    /**
+     * 统计计算者
+     */
     private StatisticsCalculator statisticsCalculator;
 
     public PerformanceEvaluationTask(long warmUpNs, Statement statement, StatisticsCalculator statisticsCalculator) {
@@ -36,7 +45,7 @@ public class PerformanceEvaluationTask implements Runnable {
 
     /**
      * 执行校验
-     * @param startMeasurements
+     * @param startMeasurements 开始时间
      */
     private void evaluateStatement(long startMeasurements) {
         //1. 准备阶段
@@ -50,15 +59,26 @@ public class PerformanceEvaluationTask implements Runnable {
             long startTimeNs = nanoTime();
             try {
                 statement.evaluate();
-                statisticsCalculator.addLatencyMeasurement(nanoTime() - startTimeNs);
+                statisticsCalculator.addLatencyMeasurement(getCostTimeNs(startTimeNs));
                 statisticsCalculator.incrementEvaluationCount();
             } catch (InterruptedException e) { // NOSONAR
                 // IGNORE - no metrics
             } catch (Throwable throwable) {
                 statisticsCalculator.incrementEvaluationCount();
                 statisticsCalculator.incrementErrorCount();
-                statisticsCalculator.addLatencyMeasurement(nanoTime() - startTimeNs);
+                statisticsCalculator.addLatencyMeasurement(getCostTimeNs(startTimeNs));
             }
         }
     }
+
+    /**
+     * 获取消耗的时间(单位：毫秒)
+     * @param startTimeNs 开始时间
+     * @return 消耗的时间
+     */
+    private long getCostTimeNs(long startTimeNs) {
+        long currentTimeNs = System.nanoTime();
+        return currentTimeNs - startTimeNs;
+    }
+
 }

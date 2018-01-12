@@ -25,7 +25,7 @@
         <project.compiler.level>1.7</project.compiler.level>
 
         <!--============================== INTER ==============================-->
-        <log-integration.version>1.0.0</log-integration.version>
+        <log-integration.version>1.1.1</log-integration.version>
         <paradise.version>1.1.1</paradise.version>
 
         <!--============================== OTHER ==============================-->

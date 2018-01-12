@@ -45,52 +45,52 @@ public class DefaultStatisticsCalculator implements StatisticsCalculator {
     //region methods
     @Override
     public void addLatencyMeasurement(long executionTimeNs) {
-
+        statistics.addValue(executionTimeNs);
     }
 
     @Override
     public void incrementErrorCount() {
-
+        errorCount.incrementAndGet();
     }
 
     @Override
     public long getErrorCount() {
-        return 0;
+        return errorCount.get();
     }
 
     @Override
     public float getErrorPercentage() {
-        return 0;
+        return ((float)getErrorCount() / getEvaluationCount()) * 100;
     }
 
     @Override
     public void incrementEvaluationCount() {
-
+        evaluationCount.incrementAndGet();
     }
 
     @Override
     public long getEvaluationCount() {
-        return 0;
+        return evaluationCount.get();
     }
 
     @Override
     public float getLatencyPercentile(int percentile, TimeUnit unit) {
-        return 0;
+        return (float)statistics.getPercentile((double)(percentile)) / unit.toNanos(1);
     }
 
     @Override
     public float getMaxLatency(TimeUnit unit) {
-        return 0;
+        return (float)statistics.getMax() / unit.toNanos(1);
     }
 
     @Override
     public float getMinLatency(TimeUnit unit) {
-        return 0;
+        return (float)statistics.getMin() / unit.toNanos(1);
     }
 
     @Override
     public float getMeanLatency(TimeUnit unit) {
-        return 0;
+        return (float)statistics.getMean() / unit.toNanos(1);
     }
     //endregion
 

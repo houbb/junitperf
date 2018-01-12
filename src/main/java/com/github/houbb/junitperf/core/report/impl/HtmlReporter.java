@@ -21,7 +21,7 @@ public class HtmlReporter implements Reporter {
 
     @Override
     public void report(Set<EvaluationContext> evaluationContextSet) {
-
+        System.out.println("HtmlReporter gen..");
     }
 
 }
