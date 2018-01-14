@@ -30,6 +30,7 @@ public class PerformanceEvaluationStatement extends Statement {
     private final StatisticsCalculator statisticsCalculator;
     private final Set<Reporter> reporterSet;
     private final Set<EvaluationContext> evaluationContextSet;
+    private final Class testClass;
 
     /**
      * 性能测试接口定义
@@ -38,12 +39,14 @@ public class PerformanceEvaluationStatement extends Statement {
      * @param statisticsCalculator 统计
      * @param reporterSet 报告方式
      * @param evaluationContextSet 上下文
+     * @param testClass 当前测试 class 信息
      */
     public PerformanceEvaluationStatement(EvaluationContext evaluationContext,
                                           Statement statement,
                                           StatisticsCalculator statisticsCalculator,
                                           Set<Reporter> reporterSet,
-                                          Set<EvaluationContext> evaluationContextSet) {
+                                          Set<EvaluationContext> evaluationContextSet,
+                                          final Class testClass) {
         this.evaluationContext = evaluationContext;
         this.statement = statement;
         this.statisticsCalculator = statisticsCalculator;
@@ -51,6 +54,7 @@ public class PerformanceEvaluationStatement extends Statement {
         //报告生成
         this.reporterSet = reporterSet;
         this.evaluationContextSet = evaluationContextSet;
+        this.testClass = testClass;
     }
 
     @Override
@@ -74,13 +78,15 @@ public class PerformanceEvaluationStatement extends Statement {
             }
         }
 
-        //是否根据最大的时间进行沉睡，保证执行完成？
-        //TODO: 这是否是一种好的解决办法？
-        long max = (long) statisticsCalculator.getMaxLatency(TimeUnit.MILLISECONDS);
-        Thread.sleep(max);
 
         evaluationContext.setStatisticsCalculator(statisticsCalculator);
         evaluationContext.runValidation();
+
+        //是否根据最大的时间进行沉睡，保证执行完成？
+        //TODO: 经测试这并不是很有效的方式
+        long max = (long) statisticsCalculator.getMaxLatency(TimeUnit.MILLISECONDS);
+        Thread.sleep(max);
+
         generateReportor();
     }
 
@@ -89,7 +95,7 @@ public class PerformanceEvaluationStatement extends Statement {
      */
     private synchronized void generateReportor() {
         for(Reporter reporter : reporterSet) {
-            reporter.report(evaluationContextSet);
+            reporter.report(testClass, evaluationContextSet);
         }
     }
 

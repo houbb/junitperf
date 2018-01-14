@@ -25,12 +25,7 @@ public class ConsoleReporter implements Reporter {
     private static final Log log = LogFactory.getLog(ConsoleReporter.class);
 
     @Override
-    public String reportPath() {
-        return null;
-    }
-
-    @Override
-    public void report(Set<EvaluationContext> evaluationContextSet) {
+    public void report(Class testClass, Set<EvaluationContext> evaluationContextSet) {
         for (EvaluationContext context : evaluationContextSet) {
 
             StatisticsCalculator statistics = context.getStatisticsCalculator();

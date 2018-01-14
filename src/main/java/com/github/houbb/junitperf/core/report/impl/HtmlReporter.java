@@ -5,6 +5,7 @@ import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
 import com.github.houbb.junitperf.util.FreemarkerUtil;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
+import com.github.houbb.paradise.common.util.PathUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -25,18 +26,22 @@ import java.util.concurrent.TimeUnit;
  */
 public class HtmlReporter implements Reporter {
 
-    private static final String DEFAULT_REPORT_PATH = System.getProperty("user.dir") + "/target/junitperf/reports/junitperf-report.html";
+    /**
+     * 默认输出文件夹
+     */
+    private static final String DEFAULT_REPORT_PACKAGE = System.getProperty("user.dir") + "/target/junitperf/reports/";
+    /**
+     * 模板文件夹
+     */
     private static final String REPORT_TEMPLATE = "/templates/";
+    /**
+     * 日志
+     */
     private static final Log log = LogFactory.getLog(ConsoleReporter.class);
 
     @Override
-    public String reportPath() {
-        return DEFAULT_REPORT_PATH;
-    }
-
-    @Override
-    public void report(Set<EvaluationContext> evaluationContextSet) {
-        Path outputPath = Paths.get(reportPath());
+    public void report(Class testClass, Set<EvaluationContext> evaluationContextSet) {
+        Path outputPath = Paths.get(DEFAULT_REPORT_PACKAGE +PathUtil.packageToPath(testClass.getName())+".html");
         try {
             Configuration configuration = FreemarkerUtil.getConfiguration("UTF-8");
             configuration.setClassForTemplateLoading(FreemarkerUtil.class,
@@ -49,12 +54,10 @@ public class HtmlReporter implements Reporter {
             Map<String, Object> root = new HashMap<>();
             root.put("contextData", evaluationContextSet);
             root.put("milliseconds", TimeUnit.MILLISECONDS);
-            FreemarkerUtil.createFile(template, reportPath(), root, true);
+            FreemarkerUtil.createFile(template, outputPath.toString(), root, true);
         } catch (Exception e) {
             log.error("HtmlReporter meet ex: {}", e, e);
         }
     }
-
-
 
 }

@@ -76,18 +76,45 @@ public class EvaluationContext implements Serializable {
     private StatisticsCalculator statisticsCalculator;
 
     //region 配置相关属性
+    /**
+     * 配置-线程数
+     */
     private int configThreads;
+    /**
+     * 配置-准备时间
+     */
     private long configWarmUp;
+    /**
+     * 配置-运行时间
+     */
     private long configDuration;
     //endregion
 
     //region 评判相关属性
+    /**
+     * 最小延迟
+     */
     private float requireMin;
+    /**
+     * 最大延迟
+     */
     private float requireMax;
+    /**
+     * 平均延迟
+     */
     private float requireAverage;
+    /**
+     * 每秒运行次数
+     */
     private int requireTimesPerSecond;
+    /**
+     * 百分比测试需求
+     */
     private Map<Integer, Float> requirePercentilesMap;
-    private Map<Integer, Boolean> requirePercentilesResults;    //百分比测试结果
+    /**
+     * 百分比测试结果
+     */
+    private Map<Integer, Boolean> requirePercentilesResults;
     //endregion
 
 

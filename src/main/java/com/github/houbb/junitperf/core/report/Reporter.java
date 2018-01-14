@@ -14,16 +14,10 @@ import java.util.Set;
 public interface Reporter {
 
     /**
-     * 生成报告的文件路径
-     * @return
-     */
-    String reportPath();
-
-
-    /**
      * 用于生成报告
+     * @param testClass 测试类 class 相关信息
      * @param evaluationContextSet 评价集合
      */
-    void report(Set<EvaluationContext> evaluationContextSet);
+    void report(Class testClass, Set<EvaluationContext> evaluationContextSet);
 
 }
