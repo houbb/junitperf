@@ -41,9 +41,9 @@ public @interface JunitPerfRequire {
     /**
      * 对于执行耗时的限定
      *
-     * percentiles={"200:22.3", "500:90.2"}
-     * 22.3% 的数据执行耗时不得超过 200ms;
-     * 90.2% 的数据执行耗时不得超过 500ms;
+     * percentiles={"20:220", "30:250"}
+     * 20% 的数据执行耗时不得超过 220ms;
+     * 30% 的数据执行耗时不得超过 250ms;
      * @return 执行耗时界定的数组
      */
     String[] percentiles() default {};

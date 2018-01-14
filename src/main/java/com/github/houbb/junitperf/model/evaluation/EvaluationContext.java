@@ -5,17 +5,17 @@ import com.github.houbb.junitperf.core.annotation.JunitPerfRequire;
 import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
 import com.github.houbb.paradise.common.util.ArrayUtil;
 import com.github.houbb.paradise.common.util.ObjectUtil;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Floats;
 import com.google.common.primitives.Ints;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Maps.newTreeMap;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
@@ -28,7 +28,7 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
  * @version 1.0.0
  * @since 1.0.0, 2018/01/11
  */
-public class EvaluationContext {
+public class EvaluationContext implements Serializable {
 
     /**
      * 测试方法名称
@@ -87,6 +87,7 @@ public class EvaluationContext {
     private float requireAverage;
     private int requireTimesPerSecond;
     private Map<Integer, Float> requirePercentilesMap;
+    private Map<Integer, Boolean> requirePercentilesResults;    //百分比测试结果
     //endregion
 
 
@@ -117,6 +118,30 @@ public class EvaluationContext {
 
     public void setStatisticsCalculator(StatisticsCalculator statisticsCalculator) {
         this.statisticsCalculator = statisticsCalculator;
+    }
+
+    public float getRequireMin() {
+        return requireMin;
+    }
+
+    public float getRequireMax() {
+        return requireMax;
+    }
+
+    public float getRequireAverage() {
+        return requireAverage;
+    }
+
+    public int getRequireTimesPerSecond() {
+        return requireTimesPerSecond;
+    }
+
+    public Map<Integer, Float> getRequirePercentilesMap() {
+        return requirePercentilesMap;
+    }
+
+    public Map<Integer, Boolean> getRequirePercentilesResults() {
+        return requirePercentilesResults;
     }
 
     public String getMethodName() {
@@ -153,7 +178,15 @@ public class EvaluationContext {
             requireAverage = junitPerfRequire.average();
             requireTimesPerSecond = junitPerfRequire.timesPerSecond();
             requirePercentilesMap = parseRequirePercentilesMap(junitPerfRequire.percentiles());
+        } else {
+            requireMin = -1;
+            requireMax = -1;
+            requireAverage = -1;
+            requireTimesPerSecond = -1;
+            requirePercentilesMap = newHashMap();   //避免使用NPE
+            requirePercentilesResults = newHashMap();
         }
+
     }
 
     /**
@@ -247,14 +280,14 @@ public class EvaluationContext {
      * 最小延迟是否符合
      * @return {@code true} 是
      */
-    private boolean isMinAchieved() {
+    public boolean isMinAchieved() {
         return validateLatency(statisticsCalculator.getMinLatency(TimeUnit.NANOSECONDS), requireMin);
     }
     /**
      * 最大延迟是否符合
      * @return {@code true} 是
      */
-    private boolean isMaxAchieved(){
+    public boolean isMaxAchieved(){
         return validateLatency(statisticsCalculator.getMaxLatency(TimeUnit.NANOSECONDS), requireMax);
     }
 
@@ -262,7 +295,7 @@ public class EvaluationContext {
      * 平均延迟是否符合
      * @return {@code true} 是
      */
-    private boolean isAverageAchieved() {
+    public boolean isAverageAchieved() {
         return validateLatency(statisticsCalculator.getMeanLatency(TimeUnit.NANOSECONDS), requireAverage);
     }
 
@@ -270,15 +303,15 @@ public class EvaluationContext {
      * 每秒执行次数是否符合
      * @return {@code true} 是
      */
-    private boolean isTimesPerSecondAchieved() {
-        return getThroughputQps() >= requireTimesPerSecond;
+    public boolean isTimesPerSecondAchieved() {
+        return requireTimesPerSecond < 0 || getThroughputQps() >= requireTimesPerSecond;
     }
     /**
      * 百分比阈值是否满足
      * @return {@code true} 是
      */
     private boolean isPercentilesAchieved() {
-        Map<Integer, Boolean> results = newTreeMap();
+        requirePercentilesResults = newTreeMap();
 
         //1. 计算结果
         for(Map.Entry<Integer, Float> entry : requirePercentilesMap.entrySet()) {
@@ -288,12 +321,12 @@ public class EvaluationContext {
             float thresholdMs = entry.getValue();   //限制的时间
             long thresholdNs = (long) (thresholdMs * MILLISECONDS.toNanos(1));    //
             boolean result = statisticsCalculator.getLatencyPercentile(percentile, NANOSECONDS) <= thresholdNs;
-            results.put(percentile, result);
+            requirePercentilesResults.put(percentile, result);
         }
 
 
         //2. 校验是否通过
-        for(Boolean bool : results.values()) {
+        for(Boolean bool : requirePercentilesResults.values()) {
             if(!bool) {
                 return false;
             }
@@ -305,7 +338,7 @@ public class EvaluationContext {
      * 是否成功
      * @return {@code true} 是
      */
-    private boolean isSuccessful() {
+    public boolean isSuccessful() {
         return isMinAchieved
         && isMaxAchieved
         && isAverageAchieved

@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 性能测试 statement
@@ -67,12 +68,16 @@ public class PerformanceEvaluationStatement extends Statement {
 
             Thread.sleep(evaluationContext.getConfigDuration());
         } finally {
-            //todo:这个打断存在BUG
             //具体详情，当执行打断时，被打断的任务可能已经开始执行(尚未执行完)，会出现主线程往下走，被打断的线程也在继续走的情况
             for(Thread thread : threadList) {
                 thread.interrupt();
             }
         }
+
+        //是否根据最大的时间进行沉睡，保证执行完成？
+        //TODO: 这是否是一种好的解决办法？
+        long max = (long) statisticsCalculator.getMaxLatency(TimeUnit.MILLISECONDS);
+        Thread.sleep(max);
 
         evaluationContext.setStatisticsCalculator(statisticsCalculator);
         evaluationContext.runValidation();
