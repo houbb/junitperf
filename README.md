@@ -31,7 +31,7 @@ Junit4 及其以上版本
 - jar 包引入
 
 ```xml
- <dependency>
+<dependency>
     <groupId>junit</groupId>
     <artifactId>junit</artifactId>
     <version>4.12</version>
@@ -168,6 +168,32 @@ public class JunitPerfRequireTest {
 }
 ```
 
+## 报告方式
 
+### 命令行方式
+
+大致如下：
+
+```
+[INFO] 2018-01-14 22:16:31.419 [] - Started at:   2018-01-14 22:16:30.194
+[INFO] 2018-01-14 22:16:31.419 [] - Invocations:  10
+[INFO] 2018-01-14 22:16:31.420 [] - Success:  10
+[INFO] 2018-01-14 22:16:31.420 [] - Errors:   0
+[INFO] 2018-01-14 22:16:31.420 [] - Thread Count: 2
+[INFO] 2018-01-14 22:16:31.421 [] - Warm up:      0ms
+[INFO] 2018-01-14 22:16:31.421 [] - Execution time: 1000ms
+[INFO] 2018-01-14 22:16:31.421 [] - Throughput:     10/s (Required: -1/s) - PASSED
+[INFO] 2018-01-14 22:16:31.424 [] - Min latency:   200.2112ms (Required: -1.0ms) - PASSED
+[INFO] 2018-01-14 22:16:31.424 [] - Max latency:    205.67862ms (Required: -1.0ms) - PASSED
+[INFO] 2018-01-14 22:16:31.425 [] - Ave latency:    202.97829ms (Required: -1.0ms) - PASSED
+```
+
+### HTML 方式
+
+页面如下：
+
+后期会进行样式调整。
+
+![junitperf-report-html.png](doc/img/junitperf-report-html.png)
 
 
