@@ -1,16 +1,16 @@
 # junitperf
 
+一款为开发设计的性能测试框架。
+
 Junit 性能测试框架，对于 Junit 的框架拓展。
 
+# 为什么使用?
 
-# Why use?
+- 可以和 Junit 完美契合。
 
-- 可以和 Junit 完美契合
-
-- 使用简单，便于项目开发过程中的测试实用
+- 使用简单，便于项目开发过程中的测试实用。
 
 - 提供拓展，用户可进行自定义开发。 
-
 
 # 快速开始
 
@@ -24,7 +24,7 @@ jdk1.7 及其以上版本
 
 Junit4 及其以上版本
 
-## Hello World
+## 入门案例
 
 [入门案例地址](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/HelloWorldTest.java)
 
@@ -197,3 +197,56 @@ public class JunitPerfRequireTest {
 ![junitperf-report-html.png](doc/img/junitperf-report-html.png)
 
 
+# 特别鸣谢
+
+## 缘由
+
+在看性能测试相关内容时发现这类框架(Junit 性能测试框架)。
+
+个人初步参考以下2个项目进行实现，后续可能走完全不同的路线。
+
+- junitperf
+
+[junitperf](https://github.com/noconnor/JUnitPerf)
+
+优点：实现简洁
+
+缺点：(对个人而言)
+
+使用 Jdk1.8 实现，本项目调整为 Jdk1.7，后续 V2.0 将直接升级为 Jdk1.8+;
+
+使用 [Gradle](https://gradle.org/) 作为 jar 管理，个人习惯于 [Maven](http://maven.apache.org);
+
+存在 bug(线程打断问题20180115)，且更新不是特别活跃。
+
+- contiperf
+
+[contiperf](https://github.com/lucaspouzac/contiperf)
+
+优点：功能完善
+
+缺点：好像已经停止更新了。且代码较为晦涩。
+
+## 技术支持
+
+- Junit
+
+[Junit Rules](https://github.com/junit-team/junit4/wiki/Rules)
+
+- 数据统计
+
+[Apache Commons math](http://commons.apache.org/proper/commons-math/userguide/stat.html#a1.2_Descriptive_statistics)
+
+- 报告生成
+
+[Freemarker](https://freemarker.apache.org/)
+
+- 工具类
+
+[Guava](https://github.com/google/guava)
+
+- 二方库
+
+[log-integration](https://github.com/houbb/log-integration) 用于日志整合。
+
+[paradise](https://github.com/houbb/paradise) 简单工具类封装。
