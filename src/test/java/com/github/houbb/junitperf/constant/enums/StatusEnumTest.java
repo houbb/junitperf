@@ -14,7 +14,7 @@ public class StatusEnumTest {
 
     /**
     *
-    * Method: StatusEnum(status)
+    * Method: StatusEnum(cases)
     */
     @Test
     public void StatusEnumTest() throws Exception {

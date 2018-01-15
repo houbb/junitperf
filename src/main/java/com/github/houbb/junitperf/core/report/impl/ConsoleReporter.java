@@ -4,6 +4,9 @@ import com.github.houbb.junitperf.constant.enums.StatusEnum;
 import com.github.houbb.junitperf.core.report.Reporter;
 import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
 import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
+import com.github.houbb.junitperf.model.evaluation.component.EvaluationConfig;
+import com.github.houbb.junitperf.model.evaluation.component.EvaluationRequire;
+import com.github.houbb.junitperf.model.evaluation.component.EvaluationResult;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
 
@@ -29,38 +32,41 @@ public class ConsoleReporter implements Reporter {
         for (EvaluationContext context : evaluationContextSet) {
 
             StatisticsCalculator statistics = context.getStatisticsCalculator();
+            EvaluationConfig evaluationConfig = context.getEvaluationConfig();
+            EvaluationRequire evaluationRequire = context.getEvaluationRequire();
+            EvaluationResult evaluationResult = context.getEvaluationResult();
 
-            String throughputStatus = getStatus(context.isTimesPerSecondAchieved());
+            String throughputStatus = getStatus(evaluationResult.isTimesPerSecondAchieved());
 
             log.info("Started at:   {}", context.getStartTime());
             log.info("Invocations:  {}", statistics.getEvaluationCount());
             log.info("Success:  {}", statistics.getEvaluationCount() - statistics.getErrorCount());
             log.info("Errors:   {}", statistics.getErrorCount());
-            log.info("Thread Count: {}", context.getConfigThreads());
-            log.info("Warm up:      {}ms", context.getConfigWarmUp());
-            log.info("Execution time: {}ms", context.getConfigDuration());
+            log.info("Thread Count: {}", evaluationConfig.getConfigThreads());
+            log.info("Warm up:      {}ms", evaluationConfig.getConfigWarmUp());
+            log.info("Execution time: {}ms", evaluationConfig.getConfigDuration());
             log.info("Throughput:     {}/s (Required: {}/s) - {}",
-                    context.getThroughputQps(),
-                    context.getRequireTimesPerSecond(),
+                    evaluationResult.getThroughputQps(),
+                    evaluationRequire.getRequireTimesPerSecond(),
                     throughputStatus);
             log.info("Min latency:   {}ms (Required: {}ms) - {}",
                     statistics.getMinLatency(MILLISECONDS),
-                    context.getRequireMin(),
-                    getStatus(context.isMinAchieved()));
+                    evaluationRequire.getRequireMin(),
+                    getStatus(evaluationResult.isMinAchieved()));
             log.info("Max latency:    {}ms (Required: {}ms) - {}",
                     statistics.getMaxLatency(MILLISECONDS),
-                    context.getRequireMax(),
-                    getStatus(context.isMaxAchieved()));
+                    evaluationRequire.getRequireMax(),
+                    getStatus(evaluationResult.isMaxAchieved()));
             log.info("Ave latency:    {}ms (Required: {}ms) - {}",
                     statistics.getMeanLatency(MILLISECONDS),
-                    context.getRequireAverage(),
-                    getStatus(context.isAverageAchieved()));
+                    evaluationRequire.getRequireAverage(),
+                    getStatus(evaluationResult.isAverageAchieved()));
 
 
-            for (Map.Entry<Integer, Float> entry : context.getRequirePercentilesMap().entrySet()) {
+            for (Map.Entry<Integer, Float> entry : evaluationRequire.getRequirePercentilesMap().entrySet()) {
                 Integer percentile = entry.getKey();
                 Float threshold = entry.getValue();
-                boolean result = context.getRequirePercentilesResults().get(percentile);
+                boolean result = evaluationResult.getIsPercentilesAchievedMap().get(percentile);
                 String percentileStatus = getStatus(result);
                 log.info("Percentile: {}%%    {}ms (Required: {}ms) - {}",
                         percentile,

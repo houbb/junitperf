@@ -20,13 +20,12 @@
     <#list contextData as context>
         <tr>
             <!-- Success: #2b67a4 failure: #d9534f -->
-            <#if context.isSuccessful()>
+            <#if context.evaluationResult.isSuccessful()>
                 <td style="background: #2b67a4;">&nbsp;</td>
             <#else>
-                <td style="background: #d9534f;"
-                '>&nbsp;</td>
+                <td style="background: #d9534f;">&nbsp;</td>
             </#if>
-            <td><a href='#${context.methodName}'>${context.methodName}</td>
+            <td><a href='#${context.methodName}'>${context.methodName}</a></td>
         </tr>
     </#list>
 
@@ -75,7 +74,11 @@
             <td>
 
                 <table style='font-family:sans-serif;'>
-                    <tr><th>Started at:</th><td colspan='2'><b>${context.startTime}</b></td></tr>
+                    <tr>
+                        <th align='right'>Started at:</th>
+                        <td align='right' colspan='2'><b>${context.startTime}</b></td>
+                    </tr>
+
                     <tr>
                         <th align='right' valign='top'>Invocations:</th>
                         <td align='right'>${context.statisticsCalculator.evaluationCount}</td>
@@ -91,12 +94,12 @@
                     <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                     <tr>
                         <th align='right' valign='top'>Thread Count:</th>
-                        <td align='right'>${context.configThreads}</td>
+                        <td align='right'>${context.evaluationConfig.configThreads}</td>
                         <td align='right'></td>
                     </tr>
                     <tr>
                         <th align='right' valign='top'>Warm up:</th>
-                        <td align='right'>${context.configWarmUp} ms</td>
+                        <td align='right'>${context.evaluationConfig.configWarmUp} ms</td>
                         <td align='right'></td>
                     </tr>
                     <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
@@ -107,50 +110,50 @@
                     </tr>
                     <tr>
                         <th align='right' valign='top'>Execution time:</th>
-                        <td align='right'>${context.configDuration} ms</td>
+                        <td align='right'>${context.evaluationConfig.configDuration} ms</td>
                         <td align='right'></td>
                     </tr>
 
                     <tr>
-                        <#assign colour = context.isTimesPerSecondAchieved() ? string("#2b67a4", "#d9534f")>
+                        <#assign colour = context.evaluationResult.isTimesPerSecondAchieved() ? string("#2b67a4", "#d9534f")>
 
                         <th align='right' valign='top'><b style='color:${colour}'>Throughput:</b></th>
-                        <td align='right'><b style='color:${colour};'>${context.getThroughputQps()} / s</b></td>
-                        <td align='right'><b style='color:${colour};'>${context.requireTimesPerSecond} / s</b></td>
+                        <td align='right'><b style='color:${colour};'>${context.evaluationResult.getThroughputQps()} / s</b></td>
+                        <td align='right'><b style='color:${colour};'>${context.evaluationRequire.requireTimesPerSecond} / s</b></td>
                     </tr>
 
                     <tr>
-                        <#assign colour = context.isMinAchieved() ? string("#2b67a4", "#d9534f")>
+                        <#assign colour = context.evaluationResult.isMinAchieved() ? string("#2b67a4", "#d9534f")>
                         <th align='right' valign='top'><b style='color:${colour}'>Min. latency:</b></th>
                         <td align='right'><b style='color:${colour}'>${context.statisticsCalculator.getMinLatency(milliseconds)} ms</b></td>
-                        <td align='right'><b style='color:${colour}'>${context.requireMin} ms</b></td>
+                        <td align='right'><b style='color:${colour}'>${context.evaluationRequire.requireMin} ms</b></td>
                     </tr>
 
                     <tr>
-                        <#assign colour = context.isAverageAchieved() ? string("#2b67a4", "#d9534f")>
+                        <#assign colour = context.evaluationResult.isAverageAchieved() ? string("#2b67a4", "#d9534f")>
                         <th align='right' valign='top'><b style='color:${colour}'>Average latency:</b></th>
                         <td align='right'><b style='color:${colour}'>${context.statisticsCalculator.getMeanLatency(milliseconds)} ms</b></td>
-                        <td align='right'><b style='color:${colour}'>${context.requireAverage} ms</b></td>
+                        <td align='right'><b style='color:${colour}'>${context.evaluationRequire.requireAverage} ms</b></td>
                     </tr>
 
                     <tr>
-                        <#assign colour = context.isMaxAchieved() ? string("#2b67a4", "#d9534f")>
+                        <#assign colour = context.evaluationResult.isMaxAchieved() ? string("#2b67a4", "#d9534f")>
                         <th align='right' valign='top'><b style='color:${colour}'>Max latency:</b></th>
                         <td align='right'><b style='color:${colour}'>${context.statisticsCalculator.getMaxLatency(milliseconds)} ms</b></td>
-                        <td align='right'><b style='color:${colour}'>${context.requireMax} ms</b></td>
+                        <td align='right'><b style='color:${colour}'>${context.evaluationRequire.requireMax} ms</b></td>
                     </tr>
 
-                    <#--<#assign percentMap = context.getRequirePercentilesMap()>-->
-                    <#--<#list percentMap?keys as entryKey>-->
-                        <#--${context.getRequirePercentilesResults().get(entryKey)+""}-->
+                    <#assign percentMap = context.evaluationRequire.getRequirePercentilesMap()>
 
-                        <#--&lt;#&ndash;<#assign colour = context.getRequirePercentilesResults().get(entryKey) ? string("#2b67a4", "#d9534f")>&ndash;&gt;-->
-                        <#--<tr>-->
-                        <#--<th align='right' valign='top'><b style='color:${colour}'>${entryKey}</b></th>-->
-                        <#--<td align='right'><b style='color:${colour}'>${context.statisticsCalculator.getLatencyPercentile(entryKey, milliseconds)} ms</b></td>-->
-                        <#--&lt;#&ndash;<td align='right'><b style='color:${colour}'>${percentMap["${entryKey}"]} ms</b></td>&ndash;&gt;-->
-                        <#--</tr>-->
-                    <#--</#list>-->
+                    <#list percentMap.keySet() as entryKey>
+                        <#assign colour = context.evaluationResult.getIsPercentilesAchievedMap().get(entryKey) ? string("#2b67a4", "#d9534f")>
+
+                        <tr>
+                            <th align='right' valign='top'><b style='color:${colour}'>Percent ${entryKey}:</b></th>
+                            <td align='right'><b style='color:${colour}'>${context.statisticsCalculator.getLatencyPercentile(entryKey, milliseconds)} ms</b></td>
+                            <td align='right'><b style='color:${colour}'>${percentMap.get(entryKey)} ms</b></td>
+                        </tr>
+                    </#list>
 
                 </table>
 

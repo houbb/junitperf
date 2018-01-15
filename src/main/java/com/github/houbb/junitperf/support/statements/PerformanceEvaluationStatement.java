@@ -3,6 +3,7 @@ package com.github.houbb.junitperf.support.statements;
 import com.github.houbb.junitperf.core.report.Reporter;
 import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
 import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
+import com.github.houbb.junitperf.model.evaluation.component.EvaluationConfig;
 import com.github.houbb.junitperf.support.task.PerformanceEvaluationTask;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.junit.runners.model.Statement;
@@ -61,15 +62,16 @@ public class PerformanceEvaluationStatement extends Statement {
         List<PerformanceEvaluationTask> taskList = new LinkedList<>();
 
         try {
-            for(int i = 0; i < evaluationContext.getConfigThreads(); i++) {
-                PerformanceEvaluationTask task = new PerformanceEvaluationTask(evaluationContext.getConfigWarmUp(),
+            EvaluationConfig evaluationConfig = evaluationContext.getEvaluationConfig();
+            for(int i = 0; i < evaluationConfig.getConfigThreads(); i++) {
+                PerformanceEvaluationTask task = new PerformanceEvaluationTask(evaluationConfig.getConfigWarmUp(),
                         statement, statisticsCalculator);
                 Thread t = FACTORY.newThread(task);
                 taskList.add(task);
                 t.start();
             }
 
-            Thread.sleep(evaluationContext.getConfigDuration());
+            Thread.sleep(evaluationConfig.getConfigDuration());
         } finally {
             //具体详情，当执行打断时，被打断的任务可能已经开始执行(尚未执行完)，会出现主线程往下走，被打断的线程也在继续走的情况
             for(PerformanceEvaluationTask task : taskList) {

@@ -2,6 +2,7 @@ package com.github.houbb.junitperf.util;
 
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
+import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.*;
 
 import java.io.*;
@@ -55,6 +56,9 @@ public class FreemarkerUtil {
 
             // 设置异常处理器//这样的话就可以${a.b.c.d}即使没有属性也不会出错
             configuration.setTemplateExceptionHandler(TemplateExceptionHandler.IGNORE_HANDLER);
+
+            //默认 FTL map 中不支持非 String 的 key
+            configuration.setObjectWrapper(new BeansWrapper());
         }
 
         return configuration;
