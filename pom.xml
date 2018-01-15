@@ -149,6 +149,17 @@
                     <testFailureIgnore>${plugin.surefire.ignore-failure}</testFailureIgnore>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>gen-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <configuration>
+                    <isOverwriteWhenExists>false</isOverwriteWhenExists>
+                    <encoding>utf-8</encoding>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 

@@ -76,9 +76,6 @@ public class FreemarkerUtil {
 
         //create parent dir first.
         boolean makeDirs = file.getParentFile().mkdirs();
-//        if (!makeDirs) {
-//            log.warn("MakeDirs Fails!");
-//        }
 
         if (!file.exists()) {
             result = file.createNewFile();
@@ -88,7 +85,6 @@ public class FreemarkerUtil {
             flushFileContent(template, map, file);
         } else {
             //ignore
-//            log.warn("Ignore create file: " + targetFilePath);
         }
 
         return result;

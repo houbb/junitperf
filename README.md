@@ -1,21 +1,23 @@
 # junitperf
 
-一款为开发设计的性能测试框架。
-
-Junit 性能测试框架，对于 Junit 的框架拓展。
+一款为 java 开发者设计的性能测试框架。
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.houbb/junitperf/badge.svg)](http://mvnrepository.com/artifact/com.github.houbb/junitperf)
 [![Build Status](https://www.travis-ci.org/houbb/junitperf.svg?branch=release_1.0.1)](https://www.travis-ci.org/houbb/junitperf?branch=release_1.0.1)
 [![Coverage Status](https://coveralls.io/repos/github/houbb/junitperf/badge.svg?branch=release_1.0.1)](https://coveralls.io/github/houbb/junitperf?branch=release_1.0.1)
 
 
-# 为什么使用?
+## 为什么使用?
 
 - 可以和 Junit 完美契合。
 
 - 使用简单，便于项目开发过程中的测试实用。
 
-- 提供拓展，用户可进行自定义开发。 
+- 提供拓展，用户可进行自定义开发。
+
+## 变更记录
+
+[变更日志](ChangeLog.md) 
 
 # 快速开始
 
