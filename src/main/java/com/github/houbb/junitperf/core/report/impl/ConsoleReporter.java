@@ -1,6 +1,6 @@
 package com.github.houbb.junitperf.core.report.impl;
 
-import com.github.houbb.junitperf.constant.StatusConstant;
+import com.github.houbb.junitperf.constant.enums.StatusEnum;
 import com.github.houbb.junitperf.core.report.Reporter;
 import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
 import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
@@ -73,11 +73,16 @@ public class ConsoleReporter implements Reporter {
     }
 
 
-    private String getStatus(boolean status) {
-        if (status) {
-            return StatusConstant.PASSED;
+    /**
+     * 获取状态
+     * @param isSuccess 是否成功
+     * @return 显示状态字符串
+     */
+    private String getStatus(boolean isSuccess) {
+        if (isSuccess) {
+            return StatusEnum.PASSED.getStatus();
         }
-        return StatusConstant.FAILED;
+        return StatusEnum.FAILED.getStatus();
     }
 
 }

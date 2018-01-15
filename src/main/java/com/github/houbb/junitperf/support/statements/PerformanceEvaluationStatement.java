@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 性能测试 statement
@@ -59,34 +58,27 @@ public class PerformanceEvaluationStatement extends Statement {
 
     @Override
     public void evaluate() throws Throwable {
-        List<Thread> threadList = new LinkedList<>();
+        List<PerformanceEvaluationTask> taskList = new LinkedList<>();
 
         try {
             for(int i = 0; i < evaluationContext.getConfigThreads(); i++) {
                 PerformanceEvaluationTask task = new PerformanceEvaluationTask(evaluationContext.getConfigWarmUp(),
                         statement, statisticsCalculator);
                 Thread t = FACTORY.newThread(task);
-                threadList.add(t);
+                taskList.add(task);
                 t.start();
             }
 
             Thread.sleep(evaluationContext.getConfigDuration());
         } finally {
             //具体详情，当执行打断时，被打断的任务可能已经开始执行(尚未执行完)，会出现主线程往下走，被打断的线程也在继续走的情况
-            for(Thread thread : threadList) {
-                thread.interrupt();
+            for(PerformanceEvaluationTask task : taskList) {
+                task.setContinue(false);    //终止执行的任务
             }
         }
 
-
         evaluationContext.setStatisticsCalculator(statisticsCalculator);
         evaluationContext.runValidation();
-
-        //是否根据最大的时间进行沉睡，保证执行完成？
-        //TODO: 经测试这并不是很有效的方式
-        long max = (long) statisticsCalculator.getMaxLatency(TimeUnit.MILLISECONDS);
-        Thread.sleep(max);
-
         generateReportor();
     }
 
