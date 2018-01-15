@@ -13,8 +13,8 @@
         <plugin.compiler.version>3.2</plugin.compiler.version>
         <plugin.compiler.version>3.2</plugin.compiler.version>
         <plugin.surefire.version>2.18.1</plugin.surefire.version>
-        <plugin.surefire.skip-it>true</plugin.surefire.skip-it>
-        <plugin.surefire.ignore-failure>true</plugin.surefire.ignore-failure>
+        <plugin.surefire.skip-it>false</plugin.surefire.skip-it>
+        <plugin.surefire.ignore-failure>false</plugin.surefire.ignore-failure>
 
         <plugin.maven-source-plugin.version>2.2.1</plugin.maven-source-plugin.version>
         <plugin.maven-javadoc-plugin.version>2.9.1</plugin.maven-javadoc-plugin.version>
