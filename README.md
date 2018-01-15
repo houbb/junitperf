@@ -4,6 +4,11 @@
 
 Junit 性能测试框架，对于 Junit 的框架拓展。
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.houbb/junitperf/badge.svg)](http://mvnrepository.com/artifact/com.github.houbb/junitperf)
+[![Build Status](https://www.travis-ci.org/houbb/junitperf.svg?branch=master)](https://www.travis-ci.org/houbb/junitperf?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/houbb/junitperf/badge.svg?branch=master)](https://coveralls.io/github/houbb/junitperf?branch=master)
+
+
 # 为什么使用?
 
 - 可以和 Junit 完美契合。
