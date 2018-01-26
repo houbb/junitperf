@@ -16,7 +16,9 @@ import java.util.Map;
  * @author houbinbin
  * @version 1.0
  */
-public class FreemarkerUtil {
+public final class FreemarkerUtil {
+
+    private FreemarkerUtil(){}
 
     /**    
      * 日志    
@@ -32,9 +34,8 @@ public class FreemarkerUtil {
      * 获取配置
      * @param encoding 编码
      * @return 配置
-     * @throws Exception if any
      */
-    public static Configuration getConfiguration(String encoding) throws Exception {
+    public static Configuration getConfiguration(String encoding) {
             return getConfiguration(encoding, true);
     }
 
@@ -43,9 +44,8 @@ public class FreemarkerUtil {
      * @param encoding 编码
      * @param isForce 是否强制
      * @return 配置
-     * @throws Exception    if any
      */
-    public static Configuration getConfiguration(String encoding, boolean isForce) throws Exception {
+    public static Configuration getConfiguration(String encoding, boolean isForce) {
         if (configuration == null
                 || isForce) {
             configuration = new Configuration();

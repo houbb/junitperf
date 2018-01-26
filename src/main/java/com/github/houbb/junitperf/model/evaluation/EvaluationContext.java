@@ -9,22 +9,8 @@ import com.github.houbb.junitperf.model.evaluation.component.EvaluationResult;
 import com.github.houbb.junitperf.support.builder.EvaluationConfigBuilder;
 import com.github.houbb.junitperf.support.builder.EvaluationRequireBuilder;
 import com.github.houbb.junitperf.support.builder.EvaluationResultBuilder;
-import com.github.houbb.paradise.common.util.ArrayUtil;
-import com.github.houbb.paradise.common.util.ObjectUtil;
-import com.google.common.collect.Maps;
-import com.google.common.primitives.Floats;
-import com.google.common.primitives.Ints;
 
 import java.io.Serializable;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
-import static com.google.common.collect.Maps.newHashMap;
-import static com.google.common.collect.Maps.newTreeMap;
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
 /**
  * 评价接口定义，用于展现最后的性能评价结果。

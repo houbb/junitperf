@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
  */
 public final class TimeUtil {
 
+    private TimeUtil(){}
 
     /**
      * 毫秒转化为纳秒

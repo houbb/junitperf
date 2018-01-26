@@ -38,6 +38,10 @@
         <junit.version>4.12</junit.version>
         <freemarker.version>2.3.23</freemarker.version>
         <google.guava.version>21.0</google.guava.version>
+
+
+        <!--sonar-->
+        <sonar.java.binaries>target/classes</sonar.java.binaries>
     </properties>
 
 
@@ -193,6 +197,13 @@
             </plugin>
             <!--=================================== coveralls END ===================================-->
 
+            <!--sonar-->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.1.1</version>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -286,6 +297,18 @@
                     <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
                 </repository>
             </distributionManagement>
+        </profile>
+
+        <!--mvn clean install sonar:sonar -Dmaven.test.skip=true -Dsonar.host.url=http://localhost:9000-->
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- SERVER ON A REMOTE HOST -->
+                <sonar.host.url>http://127.0.0.1:9000</sonar.host.url>
+            </properties>
         </profile>
     </profiles>
 
