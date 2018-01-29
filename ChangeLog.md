@@ -13,3 +13,9 @@ add junit test
 1. 修正 TimeUtil 方法名称
 
 2. 调整 EvaluationContext
+
+# release_1.0.2
+
+- 2018-1-29 09:17:15
+
+解决 sonar 相关 BUGS 和坏味道
