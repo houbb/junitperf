@@ -1,5 +1,6 @@
 package com.github.houbb.junitperf.util;
 
+import com.github.houbb.junitperf.support.exception.JunitPerfException;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
 import freemarker.ext.beans.BeansWrapper;
@@ -72,14 +73,17 @@ public final class FreemarkerUtil {
      * @param targetFilePath 目标路径
      * @param map 配置属性
      * @param isOverwriteWhenExists 是否覆盖
-     * @throws Exception if any
+     * @throws JunitPerfException if any
+     * @throws IOException if any
      */
-    public static boolean createFile(Template template, String targetFilePath, Map<String, Object> map, boolean isOverwriteWhenExists) throws Exception {
+    public static boolean createFile(Template template, String targetFilePath, Map<String, Object> map, boolean isOverwriteWhenExists)
+            throws JunitPerfException, IOException {
         boolean result = true;
         File file = new File(targetFilePath);
 
         //create parent dir first.
         boolean makeDirs = file.getParentFile().mkdirs();
+        log.debug("create file makeDirs:{}", makeDirs);
 
         if (!file.exists()) {
             result = file.createNewFile();
@@ -99,13 +103,16 @@ public final class FreemarkerUtil {
      * @param template 模板
      * @param map 配置
      * @param file 文件
-     * @throws IOException if any
-     * @throws TemplateException if any
      */
-    private static void flushFileContent(Template template, Map<String, Object> map, File file) throws IOException, TemplateException {
-        Writer out = new BufferedWriter(new FileWriter(file));
-        template.process(map, out);
-        out.flush();
+    private static void flushFileContent(Template template, Map<String, Object> map, File file)
+            throws JunitPerfException {
+        try {
+            Writer out = new BufferedWriter(new FileWriter(file));
+            template.process(map, out);
+            out.flush();
+        } catch (IOException | TemplateException e) {
+            throw new JunitPerfException(e);
+        }
     }
 
 }

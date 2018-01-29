@@ -2,7 +2,7 @@ package com.github.houbb.junitperf.support.exception;
 
 /**
  * 性能测试运行时异常
- * 要求：本项目中所有异常统一使用本类进行处理
+ * 要求：本项目中所有运行时异常统一使用本类进行处理
  * @author bbhou
  * @version 1.0.0
  * @since 1.0.0, 2018/01/11

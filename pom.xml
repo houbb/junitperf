@@ -197,6 +197,7 @@
             </plugin>
             <!--=================================== coveralls END ===================================-->
 
+            <!--mvn clean install sonar:sonar -Dmaven.test.skip=true -Dsonar.host.url=http://localhost:9000-->
             <!--sonar-->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
@@ -297,18 +298,6 @@
                     <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
                 </repository>
             </distributionManagement>
-        </profile>
-
-        <!--mvn clean install sonar:sonar -Dmaven.test.skip=true -Dsonar.host.url=http://localhost:9000-->
-        <profile>
-            <id>sonar</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <!-- SERVER ON A REMOTE HOST -->
-                <sonar.host.url>http://127.0.0.1:9000</sonar.host.url>
-            </properties>
         </profile>
     </profiles>
 
