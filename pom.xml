@@ -210,7 +210,7 @@
 
     <!--============================== ADD For sonatype START ==============================-->
     <name>junitperf</name>
-    <description>专门用于生成 maven 项目的项目原型</description>
+    <description>Junit 性能测试框架</description>
 
     <parent>
         <groupId>org.sonatype.oss</groupId>
