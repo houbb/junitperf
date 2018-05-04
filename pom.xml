@@ -6,9 +6,6 @@
     <artifactId>junitperf</artifactId>
     <version>1.0.2-SNAPSHOT</version>
 
-
-    <description>The junit perfmance tool for java devs.</description>
-
     <properties>
         <!--============================== All Plugins START ==============================-->
         <plugin.compiler.version>3.2</plugin.compiler.version>
