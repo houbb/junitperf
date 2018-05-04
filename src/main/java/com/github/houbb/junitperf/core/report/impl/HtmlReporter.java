@@ -2,6 +2,7 @@ package com.github.houbb.junitperf.core.report.impl;
 
 import com.github.houbb.junitperf.core.report.Reporter;
 import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
+import com.github.houbb.junitperf.support.i18n.I18N;
 import com.github.houbb.junitperf.util.FreemarkerUtil;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
@@ -45,15 +46,17 @@ public class HtmlReporter implements Reporter {
         try {
             Configuration configuration = FreemarkerUtil.getConfiguration("UTF-8");
             configuration.setClassForTemplateLoading(FreemarkerUtil.class,
-                    REPORT_TEMPLATE); //默认
+                    REPORT_TEMPLATE);
 
             Template template = configuration.getTemplate("report.ftl");
             Files.createDirectories(outputPath.getParent());
             log.info("Rendering report to: " + outputPath);
 
             Map<String, Object> root = new HashMap<>();
+            root.put("className", testClass.getSimpleName());
             root.put("contextData", evaluationContextSet);
             root.put("milliseconds", TimeUnit.MILLISECONDS);
+            root.put("i18n", I18N.buildI18nVo());
             FreemarkerUtil.createFile(template, outputPath.toString(), root, true);
         } catch (Exception e) {
             log.error("HtmlReporter meet ex: {}", e, e);

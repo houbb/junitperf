@@ -15,6 +15,8 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class DefaultStatisticsCalculator implements StatisticsCalculator {
 
+    private static final long serialVersionUID = 3715867392352544936L;
+
     //region private fields
     /**
      * 统计方式

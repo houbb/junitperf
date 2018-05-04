@@ -73,12 +73,12 @@ public class EvaluationResultBuilder implements Builder<EvaluationResult> {
     /**
      * 延迟校验
      * @param actualNs 实际时间(纳秒)
-     * @param requiredMs 实际时间(毫秒)
+     * @param requiredMs 需求时间(毫秒)
      * @return {@code true} 是
      */
     private boolean validateLatency(float actualNs, float requiredMs) {
         long thresholdNs = (long)(requiredMs * MILLISECONDS.toNanos(1));
-        return evaluationRequire.getRequireMax() < 0 || actualNs <= thresholdNs;
+        return actualNs <= thresholdNs;
     }
 
     /**
@@ -86,13 +86,20 @@ public class EvaluationResultBuilder implements Builder<EvaluationResult> {
      * @return {@code true} 是
      */
     public boolean isMinAchieved() {
+        if(evaluationRequire.getRequireMin() < 0) {
+            return true;
+        }
         return validateLatency(statisticsCalculator.getMinLatency(TimeUnit.NANOSECONDS), evaluationRequire.getRequireMin());
     }
+
     /**
      * 最大延迟是否符合
      * @return {@code true} 是
      */
     public boolean isMaxAchieved(){
+        if(evaluationRequire.getRequireMax() < 0) {
+            return true;
+        }
         return validateLatency(statisticsCalculator.getMaxLatency(TimeUnit.NANOSECONDS), evaluationRequire.getRequireMax());
     }
 
@@ -101,6 +108,9 @@ public class EvaluationResultBuilder implements Builder<EvaluationResult> {
      * @return {@code true} 是
      */
     public boolean isAverageAchieved() {
+        if(evaluationRequire.getRequireAverage() < 0) {
+            return true;
+        }
         return validateLatency(statisticsCalculator.getMeanLatency(TimeUnit.NANOSECONDS), evaluationRequire.getRequireAverage());
     }
 

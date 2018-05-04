@@ -1,23 +1,18 @@
 #!/usr/bin/env bash
 echo "============================= RELEASE START..."
 
-# 版本号信息(需要手动指定)
-## 旧版本名称
-version="1.7.5"
-## 新版本名称
-newVersion="1.7.6"
-## 组织名称
-groupName="com.github.houbb"
-## 项目名称
+## 版本号信息(需要手动指定)
+oldVersion="1.0.2"
+newVersion="1.0.3"
 projectName="junitperf"
 
 # release 项目版本
 ## snapshot 版本号
-snapshot_version=${version}"-SNAPSHOT"
+snapshot_version=${oldVersion}"-SNAPSHOT"
 ## 新的版本号
-release_version=${version}
+release_version=${oldVersion}
 
-mvn versions:set -DgroupId=${groupName} -DartifactId=${projectName} -DoldVersion=${snapshot_version} -DnewVersion=${release_version}
+mvn versions:set -DgroupId=com.github.houbb -DartifactId=${projectName} -DoldVersion=${snapshot_version} -DnewVersion=${release_version}
 mvn -N versions:update-child-modules
 mvn versions:commit
 echo "1. RELEASE ${snapshot_version} TO ${release_version} DONE."
@@ -32,6 +27,11 @@ git status
 echo "2. PUSH TO GITHUB DONE."
 
 
+# 推送到 maven 中央仓库
+mvn clean deploy -P release
+
+echo "3. PUSH TO MAVEN CENTER DONE."
+
 # 合并到 master 分支
 branchName="release_"${version} # 分支名称
 git checkout master
@@ -42,7 +42,7 @@ git checkout master
 git merge ${branchName}
 git push
 
-echo "3. MERGE TO MASTER DONE."
+echo "4. MERGE TO MASTER DONE."
 
 
 # 拉取新的分支
@@ -51,12 +51,12 @@ git branch ${newBranchName}
 git checkout ${newBranchName}
 git push --set-upstream origin ${newBranchName}
 
-echo "4. NEW BRANCH DONE."
+echo "5. NEW BRANCH DONE."
 
 # 修改新分支的版本号
 ## snapshot 版本号
 snapshot_new_version=${newVersion}"-SNAPSHOT"
-mvn versions:set -DgroupId=${groupName} -DartifactId=${projectName} -DoldVersion=${release_version} -DnewVersion=${snapshot_new_version}
+mvn versions:set -DgroupId=com.github.houbb -DartifactId=${projectName} -DoldVersion=${release_version} -DnewVersion=${snapshot_new_version}
 mvn -N versions:update-child-modules
 mvn versions:commit
 
@@ -64,7 +64,7 @@ git add .
 git commit -m "modify branch ${release_version} TO ${snapshot_new_version}"
 git push
 git status
-echo "5. MODIFY ${release_version} TO ${snapshot_new_version} DONE."
+echo "6. MODIFY ${release_version} TO ${snapshot_new_version} DONE."
 
 echo "============================= RELEASE END..."
 

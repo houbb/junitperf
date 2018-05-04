@@ -123,4 +123,36 @@ public class EvaluationContext implements Serializable {
         this.evaluationResult = evaluationResult;
     }
     //endregion
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        EvaluationContext that = (EvaluationContext) o;
+
+        if (methodName != null ? !methodName.equals(that.methodName) : that.methodName != null)
+            return false;
+        if (startTime != null ? !startTime.equals(that.startTime) : that.startTime != null)
+            return false;
+        if (statisticsCalculator != null ? !statisticsCalculator.equals(that.statisticsCalculator) : that.statisticsCalculator != null)
+            return false;
+        if (evaluationConfig != null ? !evaluationConfig.equals(that.evaluationConfig) : that.evaluationConfig != null)
+            return false;
+        if (evaluationRequire != null ? !evaluationRequire.equals(that.evaluationRequire) : that.evaluationRequire != null)
+            return false;
+        return evaluationResult != null ? evaluationResult.equals(that.evaluationResult) : that.evaluationResult == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = methodName != null ? methodName.hashCode() : 0;
+        result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
+        result = 31 * result + (statisticsCalculator != null ? statisticsCalculator.hashCode() : 0);
+        result = 31 * result + (evaluationConfig != null ? evaluationConfig.hashCode() : 0);
+        result = 31 * result + (evaluationRequire != null ? evaluationRequire.hashCode() : 0);
+        result = 31 * result + (evaluationResult != null ? evaluationResult.hashCode() : 0);
+        return result;
+    }
 }

@@ -3,8 +3,8 @@
 一款为 java 开发者设计的性能测试框架。
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.houbb/junitperf/badge.svg)](http://mvnrepository.com/artifact/com.github.houbb/junitperf)
-[![Build Status](https://www.travis-ci.org/houbb/junitperf.svg?branch=release_1.0.1)](https://www.travis-ci.org/houbb/junitperf?branch=release_1.0.1)
-[![Coverage Status](https://coveralls.io/repos/github/houbb/junitperf/badge.svg?branch=release_1.0.1)](https://coveralls.io/github/houbb/junitperf?branch=release_1.0.1)
+[![Build Status](https://www.travis-ci.org/houbb/junitperf.svg?branch=release_1.0.2)](https://www.travis-ci.org/houbb/junitperf?branch=release_1.0.2)
+[![Coverage Status](https://coveralls.io/repos/github/houbb/junitperf/badge.svg?branch=release_1.0.2)](https://coveralls.io/github/houbb/junitperf?branch=release_1.0.2)
 
 
 ## 为什么使用?
@@ -14,6 +14,14 @@
 - 使用简单，便于项目开发过程中的测试实用。
 
 - 提供拓展，用户可进行自定义开发。
+
+## 特性
+
+- 支持 I18N
+
+- 支持多种报告生成方式，支持自定义
+
+- Junt4 完美支持，便于 Java 开发者使用。
 
 ## 变更记录
 
@@ -47,7 +55,7 @@ Junit4 及其以上版本
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>junitperf</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
@@ -202,6 +210,22 @@ public class JunitPerfRequireTest {
 后期会进行样式调整。
 
 ![junitperf-report-html.png](doc/img/junitperf-report-html.png)
+
+
+# 友情提示
+
+I18N 功能中的中文 properties 文件直接使用 `UTF-8` 格式。
+
+如果你下载本项目进行测试，出现中文乱码。
+
+## IDEA
+
+idea 用户请勾选上图中的选项
+
+【Setting】=》【File Encoding】勾选上 ascii 转换
+
+![idea-proerties-ascii.png](doc/img/idea-proerties-ascii.png)
+
 
 
 # 特别鸣谢
