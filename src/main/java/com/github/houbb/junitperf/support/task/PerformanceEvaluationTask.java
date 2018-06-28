@@ -1,7 +1,6 @@
 package com.github.houbb.junitperf.support.task;
 
 import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
-import org.junit.runners.model.Statement;
 
 import static java.lang.System.nanoTime;
 
@@ -21,7 +20,7 @@ public class PerformanceEvaluationTask implements Runnable {
     /**
      * junit statement
      */
-    private final Statement statement;
+//    private final Statement statement;
 
     /**
      * 统计计算者
@@ -33,12 +32,12 @@ public class PerformanceEvaluationTask implements Runnable {
      */
     private volatile boolean isContinue;
 
-    public PerformanceEvaluationTask(long warmUpNs, Statement statement, StatisticsCalculator statisticsCalculator) {
-        this.warmUpNs = warmUpNs;
-        this.statement = statement;
-        this.statisticsCalculator = statisticsCalculator;
-        this.isContinue = true; //默认创建时继续执行
-    }
+//    public PerformanceEvaluationTask(long warmUpNs, Statement statement, StatisticsCalculator statisticsCalculator) {
+//        this.warmUpNs = warmUpNs;
+//        this.statement = statement;
+//        this.statisticsCalculator = statisticsCalculator;
+//        this.isContinue = true; //默认创建时继续执行
+//    }
 
     @Override
     public void run() {
@@ -60,26 +59,26 @@ public class PerformanceEvaluationTask implements Runnable {
         }
 
         //1. 准备阶段
-        if (nanoTime() < startMeasurements) {
-            try {
-                statement.evaluate();
-            } catch (Throwable throwable) {
-                // IGNORE
-            }
-        } else {
-            long startTimeNs = nanoTime();
-            try {
-                statement.evaluate();
-                statisticsCalculator.addLatencyMeasurement(getCostTimeNs(startTimeNs));
-                statisticsCalculator.incrementEvaluationCount();
-            } catch (InterruptedException e) { // NOSONAR
-                // IGNORE - no metrics
-            } catch (Throwable throwable) {
-                statisticsCalculator.incrementEvaluationCount();
-                statisticsCalculator.incrementErrorCount();
-                statisticsCalculator.addLatencyMeasurement(getCostTimeNs(startTimeNs));
-            }
-        }
+//        if (nanoTime() < startMeasurements) {
+//            try {
+//                statement.evaluate();
+//            } catch (Throwable throwable) {
+//                // IGNORE
+//            }
+//        } else {
+//            long startTimeNs = nanoTime();
+//            try {
+//                statement.evaluate();
+//                statisticsCalculator.addLatencyMeasurement(getCostTimeNs(startTimeNs));
+//                statisticsCalculator.incrementEvaluationCount();
+//            } catch (InterruptedException e) { // NOSONAR
+//                // IGNORE - no metrics
+//            } catch (Throwable throwable) {
+//                statisticsCalculator.incrementEvaluationCount();
+//                statisticsCalculator.incrementErrorCount();
+//                statisticsCalculator.addLatencyMeasurement(getCostTimeNs(startTimeNs));
+//            }
+//        }
     }
 
     /**

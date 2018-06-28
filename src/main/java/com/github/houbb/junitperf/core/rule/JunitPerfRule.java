@@ -1,20 +1,11 @@
 package com.github.houbb.junitperf.core.rule;
 
-import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
-import com.github.houbb.junitperf.core.annotation.JunitPerfRequire;
 import com.github.houbb.junitperf.core.report.Reporter;
 import com.github.houbb.junitperf.core.report.impl.HtmlReporter;
 import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
 import com.github.houbb.junitperf.core.statistics.impl.DefaultStatisticsCalculator;
 import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
-import com.github.houbb.junitperf.support.statements.PerformanceEvaluationStatement;
-import com.github.houbb.paradise.common.util.DateUtil;
-import com.github.houbb.paradise.common.util.ObjectUtil;
-import org.junit.rules.TestRule;
-import org.junit.runner.Description;
-import org.junit.runners.model.Statement;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -30,7 +21,7 @@ import static com.google.common.collect.Sets.newHashSet;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class JunitPerfRule implements TestRule {
+public class JunitPerfRule {
 
     //region private fields
     /**
@@ -93,31 +84,31 @@ public class JunitPerfRule implements TestRule {
     }
     //endregion
 
-    @Override
-    public Statement apply(Statement statement, Description description) {
-        Statement activeStatement = statement;
-        JunitPerfConfig junitPerfConfig = description.getAnnotation(JunitPerfConfig.class);
-        JunitPerfRequire junitPerfRequire = description.getAnnotation(JunitPerfRequire.class);
-
-        if (ObjectUtil.isNotNull(junitPerfConfig)) {
-            // Group test contexts by test class
-            ACTIVE_CONTEXTS.putIfAbsent(description.getTestClass(), new HashSet<EvaluationContext>());
-
-            EvaluationContext evaluationContext = new EvaluationContext(description.getMethodName(), DateUtil.getSimpleDateStr());
-            evaluationContext.loadConfig(junitPerfConfig);
-            evaluationContext.loadRequire(junitPerfRequire);
-            ACTIVE_CONTEXTS.get(description.getTestClass()).add(evaluationContext);
-
-            activeStatement = new PerformanceEvaluationStatement(evaluationContext,
-                    statement,
-                    statisticsCalculator,
-                    reporterSet,
-                    ACTIVE_CONTEXTS.get(description.getTestClass()),
-                    description.getTestClass()
-            );
-        }
-
-        return activeStatement;
-    }
+//    @Override
+//    public Statement apply(Statement statement, Description description) {
+//        Statement activeStatement = statement;
+//        JunitPerfConfig junitPerfConfig = description.getAnnotation(JunitPerfConfig.class);
+//        JunitPerfRequire junitPerfRequire = description.getAnnotation(JunitPerfRequire.class);
+//
+//        if (ObjectUtil.isNotNull(junitPerfConfig)) {
+//            // Group test contexts by test class
+//            ACTIVE_CONTEXTS.putIfAbsent(description.getTestClass(), new HashSet<EvaluationContext>());
+//
+//            EvaluationContext evaluationContext = new EvaluationContext(description.getMethodName(), DateUtil.getSimpleDateStr());
+//            evaluationContext.loadConfig(junitPerfConfig);
+//            evaluationContext.loadRequire(junitPerfRequire);
+//            ACTIVE_CONTEXTS.get(description.getTestClass()).add(evaluationContext);
+//
+//            activeStatement = new PerformanceEvaluationStatement(evaluationContext,
+//                    statement,
+//                    statisticsCalculator,
+//                    reporterSet,
+//                    ACTIVE_CONTEXTS.get(description.getTestClass()),
+//                    description.getTestClass()
+//            );
+//        }
+//
+//        return activeStatement;
+//    }
 
 }

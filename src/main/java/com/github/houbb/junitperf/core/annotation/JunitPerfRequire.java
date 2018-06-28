@@ -1,5 +1,11 @@
 package com.github.houbb.junitperf.core.annotation;
 
+import com.github.houbb.junitperf.constant.VersionConstant;
+
+import org.apiguardian.api.API;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -14,7 +20,9 @@ import java.lang.annotation.Target;
  * @since 1.0.0
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
+@Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD})
+@Documented
+@API(status = API.Status.MAINTAINED, since = VersionConstant.V2_0_0)
 public @interface JunitPerfRequire {
 
     /**
