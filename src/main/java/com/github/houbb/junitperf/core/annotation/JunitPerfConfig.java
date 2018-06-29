@@ -4,6 +4,7 @@ import com.github.houbb.junitperf.constant.VersionConstant;
 import com.github.houbb.junitperf.core.jupiter.provider.PerfConfigProvider;
 
 import org.apiguardian.api.API;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.commons.annotation.Testable;

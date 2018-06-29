@@ -42,11 +42,9 @@ public class PerfConfigContext implements TestTemplateInvocationContext {
                 new TestInstancePostProcessor() {
                     @Override
                     public void postProcessTestInstance(Object testInstance, ExtensionContext context) throws Exception {
-//                        Optional optional = getParameters();
-//
-//
-//                        method.invoke(testInstance);
-//                        System.out.println(testInstance);
+                        Optional optional = getParameters();
+                        method.invoke(testInstance);
+                        System.out.println(testInstance);
                     }
                 }
         );
