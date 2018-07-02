@@ -3,13 +3,13 @@
 一款为 java 开发者设计的性能测试框架。
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.houbb/junitperf/badge.svg)](http://mvnrepository.com/artifact/com.github.houbb/junitperf)
-[![Build Status](https://www.travis-ci.org/houbb/junitperf.svg?branch=release_1.0.2)](https://www.travis-ci.org/houbb/junitperf?branch=release_1.0.2)
-[![Coverage Status](https://coveralls.io/repos/github/houbb/junitperf/badge.svg?branch=release_1.0.2)](https://coveralls.io/github/houbb/junitperf?branch=release_1.0.2)
+[![Build Status](https://www.travis-ci.org/houbb/junitperf.svg)](https://www.travis-ci.org/houbb/junitperf)
+[![Coverage Status](https://coveralls.io/repos/github/houbb/junitperf/badge.svg)](https://coveralls.io/github/houbb/junitperf)
 
 
 ## 为什么使用?
 
-- 可以和 Junit 完美契合。
+- 可以和 Junit5 完美契合。
 
 - 使用简单，便于项目开发过程中的测试实用。
 
@@ -33,11 +33,11 @@
 
 - jdk
 
-jdk1.7 及其以上版本
+jdk1.8 及其以上版本
 
 - junit
 
-Junit4 及其以上版本
+[Junit5](https://junit.org/junit5/) 及其以上版本
 
 ## 入门案例
 
@@ -47,65 +47,29 @@ Junit4 及其以上版本
 
 ```xml
 <dependency>
-    <groupId>junit</groupId>
-    <artifactId>junit</artifactId>
-    <version>4.12</version>
-</dependency>
-
-<dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>junitperf</artifactId>
-    <version>1.0.2</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
 - 使用例子
 
 ```java
-/**
- * 入门测试
- *
- * @author houbinbin
- * @version 1.0.0
- * @since 1.0.0, 2018/01/14
- */
+import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
+
 public class HelloWorldTest {
 
-    @Rule
-    public JunitPerfRule junitPerfRule = new JunitPerfRule();
-
-    /**
-     * 单一线程，执行 1000ms，默认以 html 输出测试结果
-     * @throws InterruptedException if any
-     */
-    @Test
     @JunitPerfConfig(duration = 1000)
-    public void helloWorldTest() throws InterruptedException {
-        //This is what you want to test.
-        System.out.println("hello world");
-        Thread.sleep(20);
+    public void helloTest() throws InterruptedException {
+        Thread.sleep(100);
+        System.out.println("Hello Junit5");
     }
+
 }
 ```
 
 # 配置说明
-
-## 声明 Rule
-
-```java
-@Rule
-public JunitPerfRule junitPerfRule = new JunitPerfRule();
-```
-这里主要是对于性能测试统计的**输出方式**。
-支持以下方式：
-
-| 方式 | 案例 |
-|:----|:----|
-| 默认方式 | [DefaultReporterTest](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/report/DefaultReporterTest.java) |
-| 命令行 | [ConsoleReporterTest](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/report/ConsoleReporterTest.java) |
-| HTML | [HtmlReporterTest](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/report/HtmlReporterTest.java) |
-| 组合方式 | [MultiReporterTest](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/report/MultiReporterTest.java) |
-| 自定义方式 | [DefineReporterTest](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/report/DefineReporterTest.java) |
 
 
 ## 测试注解指定
@@ -119,15 +83,13 @@ public JunitPerfRule junitPerfRule = new JunitPerfRule();
 | threads | 执行时使用多少线程执行 | int | 1 | |
 | warmUp | 准备时间 | long | 0 | 单位：毫秒 |
 | duration | 执行时间 | long | 60_000(1分钟) | 单位：毫秒 |
-
+| statistics | 统计实现 | StatisticsCalculator | DefaultStatisticsCalculator |  |
+| reporter | 报告实现 | Reporter | ConsoleReporter |  |
 
 使用如下：
 
 ```java
 public class JunitPerfConfigTest {
-
-    @Rule
-    public JunitPerfRule junitPerfRule = new JunitPerfRule();
 
     /**
      * 2个线程运行。
@@ -135,7 +97,6 @@ public class JunitPerfConfigTest {
      * 运行时间: 2000ms
      * @throws InterruptedException if any
      */
-    @Test
     @JunitPerfConfig(threads = 2, warmUp = 1000, duration = 2000)
     public void junitPerfConfigTest() throws InterruptedException {
         System.out.println("junitPerfConfigTest");
@@ -144,6 +105,21 @@ public class JunitPerfConfigTest {
 
 }
 ```
+
+### 各种报告的实现
+
+这里主要是对于性能测试统计的**输出方式**。
+支持以下方式：
+
+| 方式 | 案例 |
+|:----|:----|
+| 默认方式 | [DefaultReporterTest](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/report/DefaultReporterTest.java) |
+| 命令行 | [ConsoleReporterTest](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/report/ConsoleReporterTest.java) |
+| HTML | [HtmlReporterTest](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/report/HtmlReporterTest.java) |
+| 组合方式 | [MultiReporterTest](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/report/MultiReporterTest.java) |
+| 自定义方式 | [DefineReporterTest](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/report/DefineReporterTest.java) |
+
+
 
 ### @JunitPerfRequire
 
@@ -161,10 +137,6 @@ public class JunitPerfConfigTest {
 
 ```java
 public class JunitPerfRequireTest {
-
-    @Rule
-    public JunitPerfRule junitPerfRule = new JunitPerfRule(new ConsoleReporter());
-
     /**
      * 配置：2个线程运行。准备时间：1000ms。运行时间: 2000ms。
      * 要求：最快不可低于 210ms, 最慢不得低于 250ms, 平均不得低于 225ms, 每秒运行次数不得低于 4 次。
@@ -172,7 +144,6 @@ public class JunitPerfRequireTest {
      *
      * @throws InterruptedException if any
      */
-    @Test
     @JunitPerfConfig(threads = 2, warmUp = 1000, duration = 2000)
     @JunitPerfRequire(min = 210, max = 250, average = 225, timesPerSecond = 4, percentiles = {"20:220", "50:230"})
     public void junitPerfConfigTest() throws InterruptedException {

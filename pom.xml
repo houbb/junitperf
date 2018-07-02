@@ -51,7 +51,6 @@
                 <groupId>com.github.houbb</groupId>
                 <artifactId>log-integration</artifactId>
                 <version>${log-integration.version}</version>
-                <optional>true</optional>
             </dependency>
 
             <!--============================== OTHER ==============================-->
@@ -59,14 +58,12 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-math3</artifactId>
                 <version>${commons-math3.version}</version>
-                <optional>true</optional>
             </dependency>
 
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${google.guava.version}</version>
-                <optional>true</optional>
             </dependency>
 
             <dependency>
@@ -90,7 +87,6 @@
         <dependency>
             <groupId>com.github.houbb</groupId>
             <artifactId>log-integration</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <!--============================== OTHER ==============================-->
@@ -112,7 +108,6 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
         </dependency>
 
     </dependencies>
