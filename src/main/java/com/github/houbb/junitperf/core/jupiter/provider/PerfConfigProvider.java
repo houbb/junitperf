@@ -11,7 +11,7 @@ import org.junit.platform.commons.support.AnnotationSupport;
 import java.util.stream.Stream;
 
 /**
- * <p> </p>
+ * <p> 配置实现 </p>
  *
  * <pre> Created: 2018/6/28 下午5:53  </pre>
  * <pre> Project: junitperf  </pre>
@@ -21,7 +21,6 @@ import java.util.stream.Stream;
  * @since JDK 1.7
  */
 public class PerfConfigProvider implements TestTemplateInvocationContextProvider {
-
 
     @Override
     public boolean supportsTestTemplate(ExtensionContext context) {

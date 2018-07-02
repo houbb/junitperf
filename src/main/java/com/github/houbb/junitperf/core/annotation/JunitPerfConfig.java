@@ -2,6 +2,10 @@ package com.github.houbb.junitperf.core.annotation;
 
 import com.github.houbb.junitperf.constant.VersionConstant;
 import com.github.houbb.junitperf.core.jupiter.provider.PerfConfigProvider;
+import com.github.houbb.junitperf.core.report.Reporter;
+import com.github.houbb.junitperf.core.report.impl.ConsoleReporter;
+import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
+import com.github.houbb.junitperf.core.statistics.impl.DefaultStatisticsCalculator;
 
 import org.apiguardian.api.API;
 import org.junit.jupiter.api.Test;
@@ -14,6 +18,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.Set;
 
 /**
  * 执行接口
@@ -49,5 +54,17 @@ public @interface JunitPerfConfig {
      * @return time in mills
      */
     long duration() default 60_000L;
+
+    /**
+     * 存放统计信息工具
+     * @return 统计实现类
+     */
+    Class<? extends StatisticsCalculator> statistics() default DefaultStatisticsCalculator.class;
+
+    /**
+     * 存放报告信息类
+     * @return 报告信息
+     */
+    Class<? extends Reporter>[] reporter() default {ConsoleReporter.class};
 
 }

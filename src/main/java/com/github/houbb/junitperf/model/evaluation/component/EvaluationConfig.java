@@ -1,6 +1,9 @@
 package com.github.houbb.junitperf.model.evaluation.component;
 
+import com.github.houbb.junitperf.constant.VersionConstant;
 import com.github.houbb.junitperf.model.BaseModel;
+
+import org.apiguardian.api.API;
 
 /**
  * 验证配置
@@ -8,7 +11,10 @@ import com.github.houbb.junitperf.model.BaseModel;
  * @version 1.0.1
  * @since 1.0.1, 2018/01/15
  */
+@API(status = API.Status.INTERNAL, since = VersionConstant.V2_0_0)
 public class EvaluationConfig extends BaseModel {
+
+    private static final long serialVersionUID = 3584449169952751834L;
 
     /**
      * 配置-线程数

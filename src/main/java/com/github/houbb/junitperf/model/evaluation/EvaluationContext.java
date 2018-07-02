@@ -1,5 +1,6 @@
 package com.github.houbb.junitperf.model.evaluation;
 
+import com.github.houbb.junitperf.constant.VersionConstant;
 import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
 import com.github.houbb.junitperf.core.annotation.JunitPerfRequire;
 import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
@@ -10,7 +11,10 @@ import com.github.houbb.junitperf.support.builder.EvaluationConfigBuilder;
 import com.github.houbb.junitperf.support.builder.EvaluationRequireBuilder;
 import com.github.houbb.junitperf.support.builder.EvaluationResultBuilder;
 
+import org.apiguardian.api.API;
+
 import java.io.Serializable;
+import java.lang.reflect.Method;
 
 /**
  * 评价接口定义，用于展现最后的性能评价结果。
@@ -20,7 +24,20 @@ import java.io.Serializable;
  * @version 1.0.0
  * @since 1.0.0, 2018/01/11
  */
+@API(status = API.Status.INTERNAL, since = VersionConstant.V2_0_0)
 public class EvaluationContext implements Serializable {
+
+    private static final long serialVersionUID = -3314188451986878388L;
+
+    /**
+     * 测试实例
+     */
+    private final Object testInstance;
+
+    /**
+     * 测试方法
+     */
+    private final Method testMethod;
 
     /**
      * 测试方法名称
@@ -53,8 +70,12 @@ public class EvaluationContext implements Serializable {
     private EvaluationResult evaluationResult;
 
 
-    public EvaluationContext(String methodName, String startTime) {
-        this.methodName = methodName;
+    public EvaluationContext(final Object testInstance,
+                             final Method testMethod,
+                             String startTime) {
+        this.testInstance = testInstance;
+        this.testMethod = testMethod;
+        this.methodName = testMethod.getName();
         this.startTime = startTime;
     }
 
@@ -62,7 +83,7 @@ public class EvaluationContext implements Serializable {
      * 加载配置
      * @param junitPerfConfig 配置注解
      */
-    public void loadConfig(JunitPerfConfig junitPerfConfig) {
+    public synchronized void loadConfig(JunitPerfConfig junitPerfConfig) {
         this.evaluationConfig = new EvaluationConfigBuilder(junitPerfConfig).build();
     }
 
@@ -70,7 +91,7 @@ public class EvaluationContext implements Serializable {
      * 加载评判标准
      * @param junitPerfRequire 评判注解
      */
-    public void loadRequire(JunitPerfRequire junitPerfRequire) {
+    public synchronized void loadRequire(JunitPerfRequire junitPerfRequire) {
         this.evaluationRequire = new EvaluationRequireBuilder(junitPerfRequire).build();
     }
 
@@ -82,7 +103,6 @@ public class EvaluationContext implements Serializable {
         evaluationResult = new EvaluationResultBuilder(evaluationConfig, evaluationRequire, statisticsCalculator).build();
     }
 
-    //region getter & setter
     public String getMethodName() {
         return methodName;
     }
@@ -103,45 +123,48 @@ public class EvaluationContext implements Serializable {
         return evaluationConfig;
     }
 
-    public void setEvaluationConfig(EvaluationConfig evaluationConfig) {
-        this.evaluationConfig = evaluationConfig;
-    }
-
     public EvaluationRequire getEvaluationRequire() {
         return evaluationRequire;
-    }
-
-    public void setEvaluationRequire(EvaluationRequire evaluationRequire) {
-        this.evaluationRequire = evaluationRequire;
     }
 
     public EvaluationResult getEvaluationResult() {
         return evaluationResult;
     }
 
-    public void setEvaluationResult(EvaluationResult evaluationResult) {
-        this.evaluationResult = evaluationResult;
+    public Object getTestInstance() {
+        return testInstance;
     }
-    //endregion
 
+    public Method getTestMethod() {
+        return testMethod;
+    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         EvaluationContext that = (EvaluationContext) o;
 
-        if (methodName != null ? !methodName.equals(that.methodName) : that.methodName != null)
+        if (methodName != null ? !methodName.equals(that.methodName) : that.methodName != null) {
             return false;
-        if (startTime != null ? !startTime.equals(that.startTime) : that.startTime != null)
+        }
+        if (startTime != null ? !startTime.equals(that.startTime) : that.startTime != null) {
             return false;
-        if (statisticsCalculator != null ? !statisticsCalculator.equals(that.statisticsCalculator) : that.statisticsCalculator != null)
+        }
+        if (statisticsCalculator != null ? !statisticsCalculator.equals(that.statisticsCalculator) : that.statisticsCalculator != null) {
             return false;
-        if (evaluationConfig != null ? !evaluationConfig.equals(that.evaluationConfig) : that.evaluationConfig != null)
+        }
+        if (evaluationConfig != null ? !evaluationConfig.equals(that.evaluationConfig) : that.evaluationConfig != null) {
             return false;
-        if (evaluationRequire != null ? !evaluationRequire.equals(that.evaluationRequire) : that.evaluationRequire != null)
+        }
+        if (evaluationRequire != null ? !evaluationRequire.equals(that.evaluationRequire) : that.evaluationRequire != null) {
             return false;
+        }
         return evaluationResult != null ? evaluationResult.equals(that.evaluationResult) : that.evaluationResult == null;
     }
 

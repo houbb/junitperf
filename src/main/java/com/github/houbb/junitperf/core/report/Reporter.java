@@ -1,7 +1,10 @@
 package com.github.houbb.junitperf.core.report;
 
 
+import com.github.houbb.junitperf.constant.VersionConstant;
 import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
+
+import org.apiguardian.api.API;
 
 import java.util.Set;
 
@@ -11,6 +14,7 @@ import java.util.Set;
  * @version 1.0.0
  * @since 1.0.0, 2018/01/11
  */
+@API(status = API.Status.INTERNAL, since = VersionConstant.V2_0_0)
 public interface Reporter {
 
     /**

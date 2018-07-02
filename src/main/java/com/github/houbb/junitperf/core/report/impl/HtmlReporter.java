@@ -1,5 +1,6 @@
 package com.github.houbb.junitperf.core.report.impl;
 
+import com.github.houbb.junitperf.constant.VersionConstant;
 import com.github.houbb.junitperf.core.report.Reporter;
 import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
 import com.github.houbb.junitperf.support.i18n.I18N;
@@ -9,6 +10,8 @@ import com.github.houbb.log.integration.core.LogFactory;
 import com.github.houbb.paradise.common.util.PathUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+
+import org.apiguardian.api.API;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,6 +28,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0.0
  * @since 1.0.0, 2018/01/11
  */
+@API(status = API.Status.INTERNAL, since = VersionConstant.V2_0_0)
 public class HtmlReporter implements Reporter {
 
     /**

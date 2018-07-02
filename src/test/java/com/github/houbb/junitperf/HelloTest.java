@@ -1,6 +1,8 @@
 package com.github.houbb.junitperf;
 
 import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
+import com.github.houbb.junitperf.core.annotation.JunitPerfRequire;
+import com.github.houbb.junitperf.core.report.impl.HtmlReporter;
 
 /**
  * <p> </p>
@@ -14,9 +16,17 @@ import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
  */
 public class HelloTest {
 
-    @JunitPerfConfig(duration = 1000)
-    public void helloTest() {
+    @JunitPerfConfig(duration = 1000, reporter = {HtmlReporter.class})
+    public void helloTest() throws InterruptedException {
+        Thread.sleep(100);
         System.out.println("Hello Junit5");
+    }
+
+    @JunitPerfConfig(duration = 1000)
+    @JunitPerfRequire(max = 80)
+    public void helloTwoTest() throws InterruptedException {
+        Thread.sleep(100);
+        System.out.println("oho");
     }
 
 }

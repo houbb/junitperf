@@ -1,5 +1,6 @@
 package com.github.houbb.junitperf.core.report.impl;
 
+import com.github.houbb.junitperf.constant.VersionConstant;
 import com.github.houbb.junitperf.constant.enums.StatusEnum;
 import com.github.houbb.junitperf.core.report.Reporter;
 import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
@@ -9,6 +10,8 @@ import com.github.houbb.junitperf.model.evaluation.component.EvaluationRequire;
 import com.github.houbb.junitperf.model.evaluation.component.EvaluationResult;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
+
+import org.apiguardian.api.API;
 
 import java.util.Map;
 import java.util.Set;
@@ -23,6 +26,7 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
  * @version 1.0.0
  * @since 1.0.0, 2018/01/11
  */
+@API(status = API.Status.INTERNAL, since = VersionConstant.V2_0_0)
 public class ConsoleReporter implements Reporter {
 
     private static final Log log = LogFactory.getLog(ConsoleReporter.class);

@@ -124,15 +124,16 @@ public class EvaluationResultBuilder implements Builder<EvaluationResult> {
 
     /**
      * 构建百分比是否通过 map 结果
-     * @return
+     * @return 百分比是否通过 map 结果
      */
     private Map<Integer, Boolean> buildIsPercentilesAchievedMap() {
         Map<Integer, Boolean> isPercentilesAchievedMap = newTreeMap();
         //1. 计算结果
         for(Map.Entry<Integer, Float> entry : evaluationRequire.getRequirePercentilesMap().entrySet()) {
             Integer percentile = entry.getKey();
-            float thresholdMs = entry.getValue();   //限制的时间
-            long thresholdNs = (long) (thresholdMs * MILLISECONDS.toNanos(1));    //
+            //限制的时间
+            float thresholdMs = entry.getValue();
+            long thresholdNs = (long) (thresholdMs * MILLISECONDS.toNanos(1));
             boolean result = statisticsCalculator.getLatencyPercentile(percentile, NANOSECONDS) <= thresholdNs;
             isPercentilesAchievedMap.put(percentile, result);
         }
@@ -166,5 +167,4 @@ public class EvaluationResultBuilder implements Builder<EvaluationResult> {
                 && evaluationResult.isTimesPerSecondAchieved()
                 && evaluationResult.isPercentilesAchieved();
     }
-    //endregion
 }

@@ -9,4 +9,7 @@ import java.io.Serializable;
  * @since 1.0.1, 2018/01/15
  */
 public class BaseModel implements Serializable {
+
+    private static final long serialVersionUID = 8216424549704594536L;
+
 }

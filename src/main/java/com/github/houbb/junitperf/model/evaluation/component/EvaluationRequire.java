@@ -1,6 +1,9 @@
 package com.github.houbb.junitperf.model.evaluation.component;
 
+import com.github.houbb.junitperf.constant.VersionConstant;
 import com.github.houbb.junitperf.model.BaseModel;
+
+import org.apiguardian.api.API;
 
 import java.util.Map;
 
@@ -10,7 +13,10 @@ import java.util.Map;
  * @version 1.0.1
  * @since 1.0.1, 2018/01/15
  */
+@API(status = API.Status.INTERNAL, since = VersionConstant.V2_0_0)
 public class EvaluationRequire extends BaseModel {
+
+    private static final long   serialVersionUID = 377391606016334079L;
 
     /**
      * 最小延迟

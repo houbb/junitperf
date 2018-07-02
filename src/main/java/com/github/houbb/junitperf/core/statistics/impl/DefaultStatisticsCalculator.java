@@ -1,8 +1,10 @@
 package com.github.houbb.junitperf.core.statistics.impl;
 
+import com.github.houbb.junitperf.constant.VersionConstant;
 import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.apache.commons.math3.stat.descriptive.SynchronizedDescriptiveStatistics;
+import org.apiguardian.api.API;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
@@ -13,6 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @version 1.0.0
  * @since 1.0.0, 2018/01/11
  */
+@API(status = API.Status.INTERNAL, since = VersionConstant.V2_0_0)
 public class DefaultStatisticsCalculator implements StatisticsCalculator {
 
     private static final long serialVersionUID = 3715867392352544936L;

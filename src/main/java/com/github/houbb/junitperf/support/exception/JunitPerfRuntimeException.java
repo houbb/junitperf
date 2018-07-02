@@ -9,6 +9,8 @@ package com.github.houbb.junitperf.support.exception;
  */
 public class JunitPerfRuntimeException extends RuntimeException {
 
+    private static final long serialVersionUID = 7067503448534895751L;
+
     public JunitPerfRuntimeException() {
     }
 

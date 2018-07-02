@@ -1,5 +1,9 @@
 package com.github.houbb.junitperf.model.vo;
 
+import com.github.houbb.junitperf.constant.VersionConstant;
+
+import org.apiguardian.api.API;
+
 /**
  * <p> </p>
  *
@@ -10,6 +14,7 @@ package com.github.houbb.junitperf.model.vo;
  * @version 1.0.2
  * @since 1.0.2
  */
+@API(status = API.Status.INTERNAL, since = VersionConstant.V2_0_0)
 public class I18nVo {
 
     private String junit_performance_report;

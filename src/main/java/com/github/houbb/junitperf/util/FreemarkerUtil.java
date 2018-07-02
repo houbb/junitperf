@@ -50,7 +50,8 @@ public final class FreemarkerUtil {
         if (configuration == null
                 || isForce) {
             configuration = new Configuration();
-            configuration.setEncoding(Locale.getDefault(), encoding);    //编码
+            //编码
+            configuration.setEncoding(Locale.getDefault(), encoding);
 
             //// 设置对象的包装器
             configuration.setObjectWrapper(new DefaultObjectWrapper());

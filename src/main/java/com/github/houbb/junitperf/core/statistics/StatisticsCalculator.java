@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 统计计算接口
+ * 备注：所有的实现需要提供无参数构造器
  * @author bbhou
  * @version 1.0.0
  * @since 1.0.0, 2018/01/11
@@ -13,7 +14,7 @@ public interface StatisticsCalculator extends Serializable {
 
     /**
      * 累加延迟的时间
-     * @param executionTimeNs
+     * @param executionTimeNs 执行时间(纳秒)
      */
     void addLatencyMeasurement(long executionTimeNs);
 
@@ -47,30 +48,30 @@ public interface StatisticsCalculator extends Serializable {
 
     /**
      * 获取延迟百分比
-     * @param percentile
-     * @param unit
-     * @return
+     * @param percentile 百分比
+     * @param unit 时间单位
+     * @return 延迟百分比
      */
     float getLatencyPercentile(int percentile, TimeUnit unit);
 
     /**
      * 获取最大延迟
-     * @param unit
-     * @return
+     * @param unit 时间单位
+     * @return 最大延迟
      */
     float getMaxLatency(TimeUnit unit);
 
     /**
      * 获取最小延迟
-     * @param unit
-     * @return
+     * @param unit 时间单位
+     * @return 最小延迟
      */
     float getMinLatency(TimeUnit unit);
 
     /**
      * 获取平均延迟
-     * @param unit
-     * @return
+     * @param unit 时间单位
+     * @return 平均延迟
      */
     float getMeanLatency(TimeUnit unit);
 

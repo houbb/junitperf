@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0.0
  * @since 1.0.0, 2018/01/11
  */
+@Deprecated
 public final class TimeUtil {
 
     private TimeUtil(){}
