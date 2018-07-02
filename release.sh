@@ -2,8 +2,8 @@
 echo "============================= RELEASE START..."
 
 ## 版本号信息(需要手动指定)
-oldVersion="1.0.2"
-newVersion="1.0.3"
+oldVersion="2.0.0"
+newVersion="2.0.1"
 projectName="junitperf"
 
 # release 项目版本
