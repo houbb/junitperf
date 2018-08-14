@@ -79,6 +79,7 @@ public final class FreemarkerUtil {
      * @param isOverwriteWhenExists 是否覆盖
      * @throws JunitPerfException if any
      * @throws IOException if any
+     * @return 是否创建文件
      */
     public static boolean createFile(Template template, String targetFilePath, Map<String, Object> map, boolean isOverwriteWhenExists)
             throws JunitPerfException, IOException {

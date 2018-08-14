@@ -19,7 +19,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
- * <p> </p>
+ * <p> i18n 对象 </p>
  *
  * <pre> Created: 2018-05-02 11:24  </pre>
  * <pre> Project: junitperf  </pre>
@@ -65,7 +65,7 @@ public class I18N {
 
     /**
      * 构建 18n 对象
-     * @return
+     * @return 对象
      */
     public static I18nVo buildI18nVo() {
         I18nVo vo = new I18nVo();

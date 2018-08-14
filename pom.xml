@@ -183,6 +183,12 @@
                 <version>3.1.1</version>
             </plugin>
 
+            <!-- Javadoc -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${plugin.maven-javadoc-plugin.version}</version>
+            </plugin>
         </plugins>
     </build>
 

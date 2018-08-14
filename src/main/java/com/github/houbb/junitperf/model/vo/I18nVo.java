@@ -5,7 +5,7 @@ import com.github.houbb.junitperf.constant.VersionConstant;
 import org.apiguardian.api.API;
 
 /**
- * <p> </p>
+ * <p> i18n 对象 </p>
  *
  * <pre> Created: 2018/5/4 下午11:00  </pre>
  * <pre> Project: junitperf  </pre>

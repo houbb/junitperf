@@ -20,7 +20,7 @@ echo "1. RELEASE ${snapshot_version} TO ${release_version} DONE."
 
 # 推送到 github
 git add .
-git commit -m "release branch ${version}"
+git commit -m "release branch ${oldVersion}"
 git push
 git status
 
@@ -33,7 +33,7 @@ mvn clean deploy -P release
 echo "3. PUSH TO MAVEN CENTER DONE."
 
 # 合并到 master 分支
-branchName="release_"${version} # 分支名称
+branchName="release_"${oldVersion} # 分支名称
 git checkout master
 git pull
 git checkout ${branchName}

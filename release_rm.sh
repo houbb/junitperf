@@ -2,8 +2,8 @@
 echo "============================= RELEASE START..."
 
 ## 版本号信息(需要手动指定)
-oldVersion="2.0.1"
-newVersion="2.0.1"
+oldVersion="2.0.2"
+newVersion="2.0.2"
 projectName="junitperf"
 
 # 删除分支

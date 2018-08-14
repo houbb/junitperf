@@ -65,6 +65,7 @@ public class EvaluationResultBuilder implements Builder<EvaluationResult> {
 
     /**
      * 获取执行次数QPS
+     * @return 执行次数QPS
      */
     @SuppressWarnings("WeakerAccess")
     public long getThroughputQps() {
