@@ -5,6 +5,8 @@ import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
 import com.github.houbb.junitperf.model.evaluation.component.EvaluationConfig;
 import com.github.houbb.paradise.common.support.builder.Builder;
 
+import org.apiguardian.api.API;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
@@ -14,6 +16,7 @@ import static com.google.common.base.Preconditions.checkState;
  * @version 1.0.1
  * @since 1.0.1, 2018/01/15
  */
+@API(status = API.Status.INTERNAL)
 public class EvaluationConfigBuilder implements Builder<EvaluationConfig> {
 
     private final JunitPerfConfig junitPerfConfig;

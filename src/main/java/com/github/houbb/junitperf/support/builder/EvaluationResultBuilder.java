@@ -6,6 +6,8 @@ import com.github.houbb.junitperf.model.evaluation.component.EvaluationRequire;
 import com.github.houbb.junitperf.model.evaluation.component.EvaluationResult;
 import com.github.houbb.paradise.common.support.builder.Builder;
 
+import org.apiguardian.api.API;
+
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -19,6 +21,7 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
  * @version 1.0.1
  * @since 1.0.1, 2018/01/15
  */
+@API(status = API.Status.INTERNAL)
 public class EvaluationResultBuilder implements Builder<EvaluationResult> {
 
     /**

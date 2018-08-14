@@ -8,6 +8,8 @@ package com.github.houbb.junitperf.support.i18n;
 
 import com.github.houbb.junitperf.model.vo.I18nVo;
 
+import org.apiguardian.api.API;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,8 +28,8 @@ import java.util.ResourceBundle;
  * @version 1.0.2
  * @since 1.0.2
  */
+@API(status = API.Status.INTERNAL)
 public class I18N {
-
 
     private static final String DEFAULT_PROPERTIES_FILE_NAME = "i18n.JunitPerfMessages";
 
@@ -54,6 +56,11 @@ public class I18N {
         public static final String execution_time = "execution_time";
         public static final String success = "success";
         public static final String actual = "actual";
+
+        /**
+         * 报告信息为空
+         */
+        public static final String reportIsEmpty="reportIsEmpty";
     }
 
     /**

@@ -2,6 +2,8 @@ package com.github.houbb.junitperf.support.task;
 
 import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
 
+import org.apiguardian.api.API;
+
 import java.lang.reflect.Method;
 
 import static java.lang.System.nanoTime;
@@ -13,6 +15,7 @@ import static java.lang.System.nanoTime;
  * @version 1.0.0
  * @since 1.0.0, 2018/01/11
  */
+@API(status = API.Status.INTERNAL)
 public class PerformanceEvaluationTask implements Runnable {
 
     /**

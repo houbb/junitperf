@@ -9,6 +9,8 @@ import com.google.common.collect.Maps;
 import com.google.common.primitives.Floats;
 import com.google.common.primitives.Ints;
 
+import org.apiguardian.api.API;
+
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkState;
@@ -19,6 +21,7 @@ import static com.google.common.base.Preconditions.checkState;
  * @version 1.0.1
  * @since 1.0.1, 2018/01/15
  */
+@API(status = API.Status.INTERNAL)
 public class EvaluationRequireBuilder implements Builder<EvaluationRequire> {
 
     private final JunitPerfRequire junitPerfRequire;
