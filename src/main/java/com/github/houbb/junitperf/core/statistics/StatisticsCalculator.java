@@ -1,5 +1,7 @@
 package com.github.houbb.junitperf.core.statistics;
 
+import org.apiguardian.api.API;
+
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
@@ -10,6 +12,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0.0
  * @since 1.0.0, 2018/01/11
  */
+@API(status = API.Status.INTERNAL)
 public interface StatisticsCalculator extends Serializable {
 
     /**

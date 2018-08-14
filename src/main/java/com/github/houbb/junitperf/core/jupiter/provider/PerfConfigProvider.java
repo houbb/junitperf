@@ -3,6 +3,7 @@ package com.github.houbb.junitperf.core.jupiter.provider;
 import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
 import com.github.houbb.junitperf.core.jupiter.context.PerfConfigContext;
 
+import org.apiguardian.api.API;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestTemplateInvocationContext;
 import org.junit.jupiter.api.extension.TestTemplateInvocationContextProvider;
@@ -20,6 +21,7 @@ import java.util.stream.Stream;
  * @version 1.0
  * @since JDK 1.7
  */
+@API(status = API.Status.INTERNAL)
 public class PerfConfigProvider implements TestTemplateInvocationContextProvider {
 
     @Override

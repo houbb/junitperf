@@ -40,14 +40,12 @@ public class PerfConfigContext implements TestTemplateInvocationContext {
      * 用于存储上下文
      */
     private static final ConcurrentHashMap<Class, Set<EvaluationContext>> ACTIVE_CONTEXTS = new ConcurrentHashMap<>();
-    private final        ExtensionContext                                 context;
     private final        Method                                           method;
     private              JunitPerfConfig                                  perfConfig;
     private              JunitPerfRequire                                 perfRequire;
 
 
     public PerfConfigContext(ExtensionContext context) {
-        this.context = context;
         this.method = context.getRequiredTestMethod();
         this.perfConfig = method.getAnnotation(JunitPerfConfig.class);
         this.perfRequire = method.getAnnotation(JunitPerfRequire.class);

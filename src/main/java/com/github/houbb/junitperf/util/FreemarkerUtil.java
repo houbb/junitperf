@@ -6,6 +6,8 @@ import com.github.houbb.log.integration.core.LogFactory;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.*;
 
+import org.apiguardian.api.API;
+
 import java.io.*;
 import java.util.Locale;
 import java.util.Map;
@@ -17,6 +19,7 @@ import java.util.Map;
  * @author houbinbin
  * @version 1.0
  */
+@API(status = API.Status.INTERNAL)
 public final class FreemarkerUtil {
 
     private FreemarkerUtil(){}
