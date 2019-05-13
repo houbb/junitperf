@@ -1,5 +1,7 @@
 package com.github.houbb.junitperf.core.rule;
 
+import com.github.houbb.heaven.util.lang.ObjectUtil;
+import com.github.houbb.heaven.util.util.DateUtil;
 import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
 import com.github.houbb.junitperf.core.annotation.JunitPerfRequire;
 import com.github.houbb.junitperf.core.report.Reporter;
@@ -8,8 +10,6 @@ import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
 import com.github.houbb.junitperf.core.statistics.impl.DefaultStatisticsCalculator;
 import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
 import com.github.houbb.junitperf.support.statements.PerformanceEvaluationStatement;
-import com.github.houbb.paradise.common.util.DateUtil;
-import com.github.houbb.paradise.common.util.ObjectUtil;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;

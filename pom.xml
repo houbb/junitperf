@@ -4,7 +4,7 @@
 
     <groupId>com.github.houbb</groupId>
     <artifactId>junitperf</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.3</version>
 
     <properties>
         <!--============================== All Plugins START ==============================-->
@@ -28,15 +28,14 @@
         <project.compiler.level>1.7</project.compiler.level>
 
         <!--============================== INTER ==============================-->
-        <log-integration.version>1.1.1</log-integration.version>
-        <paradise.version>1.1.1</paradise.version>
+        <log-integration.version>1.1.5</log-integration.version>
+        <heaven.version>0.0.7</heaven.version>
 
         <!--============================== OTHER ==============================-->
         <commons-math3.version>3.6.1</commons-math3.version>
         <junit.version>4.12</junit.version>
         <freemarker.version>2.3.23</freemarker.version>
         <google.guava.version>21.0</google.guava.version>
-
 
         <!--sonar-->
         <sonar.java.binaries>target/classes</sonar.java.binaries>
@@ -47,43 +46,36 @@
     <dependencyManagement>
 
         <dependencies>
-
             <!--============================== INTER ==============================-->
             <dependency>
                 <groupId>com.github.houbb</groupId>
                 <artifactId>log-integration</artifactId>
                 <version>${log-integration.version}</version>
-                <optional>true</optional>
             </dependency>
 
             <dependency>
                 <groupId>com.github.houbb</groupId>
-                <artifactId>paradise-common</artifactId>
-                <version>${paradise.version}</version>
-                <optional>true</optional>
+                <artifactId>heaven</artifactId>
+                <version>${heaven.version}</version>
             </dependency>
-
 
             <!--============================== OTHER ==============================-->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-math3</artifactId>
                 <version>${commons-math3.version}</version>
-                <optional>true</optional>
             </dependency>
 
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${google.guava.version}</version>
-                <optional>true</optional>
             </dependency>
 
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
-                <optional>true</optional>
             </dependency>
 
             <dependency>
@@ -105,9 +97,8 @@
 
         <dependency>
             <groupId>com.github.houbb</groupId>
-            <artifactId>paradise-common</artifactId>
+            <artifactId>heaven</artifactId>
         </dependency>
-
 
         <!--============================== OTHER ==============================-->
         <dependency>
@@ -124,7 +115,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>org.freemarker</groupId>

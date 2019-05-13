@@ -1,9 +1,9 @@
 package com.github.houbb.junitperf.support.builder;
 
 
+import com.github.houbb.heaven.support.builder.IBuilder;
 import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
 import com.github.houbb.junitperf.model.evaluation.component.EvaluationConfig;
-import com.github.houbb.paradise.common.support.builder.Builder;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
@@ -14,7 +14,7 @@ import static com.google.common.base.Preconditions.checkState;
  * @version 1.0.1
  * @since 1.0.1, 2018/01/15
  */
-public class EvaluationConfigBuilder implements Builder<EvaluationConfig> {
+public class EvaluationConfigBuilder implements IBuilder<EvaluationConfig> {
 
     private final JunitPerfConfig junitPerfConfig;
 

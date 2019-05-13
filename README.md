@@ -25,7 +25,7 @@
 
 ## 变更记录
 
-[变更日志](ChangeLog.md) 
+[变更日志](CHANGELOG.md)
 
 # 快速开始
 

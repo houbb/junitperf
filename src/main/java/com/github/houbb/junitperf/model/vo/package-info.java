@@ -1,0 +1,1 @@
+package com.github.houbb.junitperf.model.vo;

@@ -1,5 +1,6 @@
 package com.github.houbb.junitperf.util;
 
+import com.github.houbb.heaven.util.util.DateUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ public class TimeUtilTest {
     @Test
     public void conertMsToNsTest() throws Exception {
         long ms = 1000;
-        Assert.assertEquals(1000_000_000, TimeUtil.convertMsToNs(ms));
+        Assert.assertEquals(1000_000_000, DateUtil.convertMsToNs(ms));
     }
 
 

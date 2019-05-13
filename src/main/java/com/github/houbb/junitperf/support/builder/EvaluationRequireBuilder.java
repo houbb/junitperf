@@ -1,10 +1,10 @@
 package com.github.houbb.junitperf.support.builder;
 
+import com.github.houbb.heaven.support.builder.IBuilder;
+import com.github.houbb.heaven.util.lang.ObjectUtil;
+import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.junitperf.core.annotation.JunitPerfRequire;
 import com.github.houbb.junitperf.model.evaluation.component.EvaluationRequire;
-import com.github.houbb.paradise.common.support.builder.Builder;
-import com.github.houbb.paradise.common.util.ArrayUtil;
-import com.github.houbb.paradise.common.util.ObjectUtil;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Floats;
 import com.google.common.primitives.Ints;
@@ -19,7 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
  * @version 1.0.1
  * @since 1.0.1, 2018/01/15
  */
-public class EvaluationRequireBuilder implements Builder<EvaluationRequire> {
+public class EvaluationRequireBuilder implements IBuilder<EvaluationRequire> {
 
     private final JunitPerfRequire junitPerfRequire;
 
@@ -44,7 +44,8 @@ public class EvaluationRequireBuilder implements Builder<EvaluationRequire> {
             evaluationRequire.setRequireMax(-1);
             evaluationRequire.setRequireAverage(-1);
             evaluationRequire.setRequireTimesPerSecond(-1);
-            evaluationRequire.setRequirePercentilesMap(Maps.<Integer, Float>newHashMap());  //避免NPE
+            //避免NPE
+            evaluationRequire.setRequirePercentilesMap(Maps.<Integer, Float>newHashMap());
         }
         return evaluationRequire;
     }
@@ -68,8 +69,10 @@ public class EvaluationRequireBuilder implements Builder<EvaluationRequire> {
             try {
                 for(String percent : percentiles) {
                     String[] strings = percent.split(":");
-                    Integer left = Ints.tryParse(strings[0]);   //消耗时间
-                    Float right = Floats.tryParse(strings[1]);  //百分比例
+                    //消耗时间
+                    Integer left = Ints.tryParse(strings[0]);
+                    //百分比例
+                    Float right = Floats.tryParse(strings[1]);
                     percentilesMap.put(left, right);
                 }
             } catch (Exception e) {

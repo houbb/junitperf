@@ -1,12 +1,12 @@
 package com.github.houbb.junitperf.core.report.impl;
 
+import com.github.houbb.heaven.util.nio.PathUtil;
 import com.github.houbb.junitperf.core.report.Reporter;
 import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
 import com.github.houbb.junitperf.support.i18n.I18N;
 import com.github.houbb.junitperf.util.FreemarkerUtil;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
-import com.github.houbb.paradise.common.util.PathUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -42,7 +42,7 @@ public class HtmlReporter implements Reporter {
 
     @Override
     public void report(Class testClass, Set<EvaluationContext> evaluationContextSet) {
-        Path outputPath = Paths.get(DEFAULT_REPORT_PACKAGE +PathUtil.packageToPath(testClass.getName())+".html");
+        Path outputPath = Paths.get(DEFAULT_REPORT_PACKAGE + PathUtil.packageToPath(testClass.getName())+".html");
         try {
             Configuration configuration = FreemarkerUtil.getConfiguration("UTF-8");
             configuration.setClassForTemplateLoading(FreemarkerUtil.class,
