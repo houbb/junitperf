@@ -1,7 +1,7 @@
 package com.github.houbb.junitperf.model.vo;
 
 /**
- * <p> </p>
+ * <p> I18N vo 对象 </p>
  *
  * <pre> Created: 2018/5/4 下午11:00  </pre>
  * <pre> Project: junitperf  </pre>

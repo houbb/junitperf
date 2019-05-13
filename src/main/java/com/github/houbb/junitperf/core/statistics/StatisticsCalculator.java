@@ -13,7 +13,7 @@ public interface StatisticsCalculator extends Serializable {
 
     /**
      * 累加延迟的时间
-     * @param executionTimeNs
+     * @param executionTimeNs 执行纳秒数
      */
     void addLatencyMeasurement(long executionTimeNs);
 
@@ -47,30 +47,30 @@ public interface StatisticsCalculator extends Serializable {
 
     /**
      * 获取延迟百分比
-     * @param percentile
-     * @param unit
-     * @return
+     * @param percentile 百分比
+     * @param unit 时间单位
+     * @return 延时百分比
      */
     float getLatencyPercentile(int percentile, TimeUnit unit);
 
     /**
      * 获取最大延迟
-     * @param unit
-     * @return
+     * @param unit 时间单位
+     * @return 最大延迟
      */
     float getMaxLatency(TimeUnit unit);
 
     /**
      * 获取最小延迟
-     * @param unit
-     * @return
+     * @param unit 时间单位
+     * @return 最小延迟
      */
     float getMinLatency(TimeUnit unit);
 
     /**
      * 获取平均延迟
-     * @param unit
-     * @return
+     * @param unit 时间单位
+     * @return 平均延迟
      */
     float getMeanLatency(TimeUnit unit);
 

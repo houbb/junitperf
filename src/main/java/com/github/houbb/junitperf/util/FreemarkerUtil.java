@@ -73,6 +73,7 @@ public final class FreemarkerUtil {
      * @param targetFilePath 目标路径
      * @param map 配置属性
      * @param isOverwriteWhenExists 是否覆盖
+     * @return 是否创建成功
      * @throws JunitPerfException if any
      * @throws IOException if any
      */
