@@ -1,5 +1,6 @@
 package com.github.houbb.junitperf.core.jupiter.context;
 
+import com.github.houbb.heaven.util.util.DateUtil;
 import com.github.houbb.junitperf.constant.VersionConstant;
 import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
 import com.github.houbb.junitperf.core.annotation.JunitPerfRequire;
@@ -8,7 +9,6 @@ import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
 import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
 import com.github.houbb.junitperf.support.exception.JunitPerfRuntimeException;
 import com.github.houbb.junitperf.support.statements.PerformanceEvaluationStatement;
-import com.github.houbb.paradise.common.util.DateUtil;
 
 import org.apiguardian.api.API;
 import org.junit.jupiter.api.extension.Extension;

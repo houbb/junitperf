@@ -25,7 +25,7 @@
 
 ## 变更记录
 
-[变更日志](ChangeLog.md) 
+[变更日志](CHANGELOG.md)
 
 # 快速开始
 
@@ -252,3 +252,19 @@ idea 用户请勾选上图中的选项
 [log-integration](https://github.com/houbb/log-integration) 用于日志整合。
 
 [paradise](https://github.com/houbb/paradise) 简单工具类封装。
+
+# 对于 junit4 的支持
+
+## 引入 jar
+
+```xml
+<dependency>
+    <groupId>com.github.houbb</groupId>
+    <artifactId>junitperf</artifactId>
+    <version>1.0.3</version>
+</dependency>
+```
+
+## 相关文档
+
+[junit4 相关使用](https://github.com/houbb/junitperf/tree/release_1.0.3)

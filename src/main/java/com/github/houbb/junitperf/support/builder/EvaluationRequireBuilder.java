@@ -1,10 +1,10 @@
 package com.github.houbb.junitperf.support.builder;
 
+import com.github.houbb.heaven.support.builder.IBuilder;
+import com.github.houbb.heaven.util.lang.ObjectUtil;
+import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.junitperf.core.annotation.JunitPerfRequire;
 import com.github.houbb.junitperf.model.evaluation.component.EvaluationRequire;
-import com.github.houbb.paradise.common.support.builder.Builder;
-import com.github.houbb.paradise.common.util.ArrayUtil;
-import com.github.houbb.paradise.common.util.ObjectUtil;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Floats;
 import com.google.common.primitives.Ints;
@@ -22,7 +22,7 @@ import static com.google.common.base.Preconditions.checkState;
  * @since 1.0.1, 2018/01/15
  */
 @API(status = API.Status.INTERNAL)
-public class EvaluationRequireBuilder implements Builder<EvaluationRequire> {
+public class EvaluationRequireBuilder implements IBuilder<EvaluationRequire> {
 
     private final JunitPerfRequire junitPerfRequire;
 

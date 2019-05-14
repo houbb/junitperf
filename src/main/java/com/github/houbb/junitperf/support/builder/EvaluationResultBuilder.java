@@ -1,11 +1,10 @@
 package com.github.houbb.junitperf.support.builder;
 
+import com.github.houbb.heaven.support.builder.IBuilder;
 import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
 import com.github.houbb.junitperf.model.evaluation.component.EvaluationConfig;
 import com.github.houbb.junitperf.model.evaluation.component.EvaluationRequire;
 import com.github.houbb.junitperf.model.evaluation.component.EvaluationResult;
-import com.github.houbb.paradise.common.support.builder.Builder;
-
 import org.apiguardian.api.API;
 
 import java.util.Map;
@@ -22,7 +21,7 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
  * @since 1.0.1, 2018/01/15
  */
 @API(status = API.Status.INTERNAL)
-public class EvaluationResultBuilder implements Builder<EvaluationResult> {
+public class EvaluationResultBuilder implements IBuilder<EvaluationResult> {
 
     /**
      * 配置
