@@ -270,4 +270,4 @@ idea 用户请勾选上图中的选项
 
 [data-factory 自动生成测试数据](https://github.com/houbb/data-factory)
 
-[data-factory 自动生成测试案例的 maven 插件](https://github.com/houbb/gen-test-plugin)
+[gen-test-plugin 自动生成测试案例的 maven 插件](https://github.com/houbb/gen-test-plugin)
