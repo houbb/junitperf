@@ -87,7 +87,7 @@ public class PerformanceEvaluationTask implements Runnable {
                 testMethod.invoke(testInstance);
                 statisticsCalculator.addLatencyMeasurement(getCostTimeNs(startTimeNs));
                 statisticsCalculator.incrementEvaluationCount();
-            } catch (Throwable throwable) {
+            } catch (Exception throwable) {
                 statisticsCalculator.incrementEvaluationCount();
                 statisticsCalculator.incrementErrorCount();
                 statisticsCalculator.addLatencyMeasurement(getCostTimeNs(startTimeNs));

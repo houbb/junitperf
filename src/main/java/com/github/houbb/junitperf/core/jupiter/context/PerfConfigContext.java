@@ -61,7 +61,7 @@ public class PerfConfigContext implements TestTemplateInvocationContext {
 
                     EvaluationContext evaluationContext = new EvaluationContext(testInstance,
                             method,
-                            DateUtil.getSimpleDateStr());
+                            DateUtil.getCurrentDateTimeStr());
                     evaluationContext.loadConfig(perfConfig);
                     evaluationContext.loadRequire(perfRequire);
                     StatisticsCalculator statisticsCalculator = perfConfig.statistics().newInstance();

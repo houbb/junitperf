@@ -13,7 +13,9 @@ import org.apiguardian.api.API;
  * @since JDK 1.7
  */
 @API(status = API.Status.INTERNAL, since = VersionConstant.V2_0_0)
-public class VersionConstant {
+public final class VersionConstant {
+
+    private VersionConstant(){}
 
     /**
      * V 2.0.0

@@ -4,7 +4,7 @@
 
     <groupId>com.github.houbb</groupId>
     <artifactId>junitperf</artifactId>
-    <version>2.0.3-SNAPSHOT</version>
+    <version>2.0.3</version>
 
     <properties>
         <!--============================== All Plugins START ==============================-->
@@ -28,8 +28,8 @@
         <project.compiler.level>1.8</project.compiler.level>
 
         <!--============================== INTER ==============================-->
-        <log-integration.version>1.1.5</log-integration.version>
-        <heaven.version>0.1.0</heaven.version>
+        <log-integration.version>1.1.7</log-integration.version>
+        <heaven.version>0.1.75</heaven.version>
 
         <!--============================== OTHER ==============================-->
         <commons-math3.version>3.6.1</commons-math3.version>
@@ -40,8 +40,6 @@
         <!--sonar-->
         <sonar.java.binaries>target/classes</sonar.java.binaries>
     </properties>
-
-
 
     <dependencyManagement>
 

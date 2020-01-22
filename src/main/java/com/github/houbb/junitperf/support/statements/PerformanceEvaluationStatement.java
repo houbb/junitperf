@@ -1,5 +1,6 @@
 package com.github.houbb.junitperf.support.statements;
 
+import com.github.houbb.heaven.util.lang.ThreadUtil;
 import com.github.houbb.junitperf.constant.VersionConstant;
 import com.github.houbb.junitperf.core.report.Reporter;
 import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
@@ -8,7 +9,6 @@ import com.github.houbb.junitperf.model.evaluation.component.EvaluationConfig;
 import com.github.houbb.junitperf.support.exception.JunitPerfRuntimeException;
 import com.github.houbb.junitperf.support.i18n.I18N;
 import com.github.houbb.junitperf.support.task.PerformanceEvaluationTask;
-import com.github.houbb.junitperf.util.ThreadUtil;
 import com.github.houbb.log.integration.core.Log;
 import com.github.houbb.log.integration.core.LogFactory;
 

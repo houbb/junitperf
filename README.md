@@ -1,11 +1,10 @@
 # junitperf
 
-一款为 java 开发者设计的性能测试框架。
+[junitperf](https://github.com/houbb/junitperf) 是一款为 java 开发者设计的性能测试框架。
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.houbb/junitperf/badge.svg)](http://mvnrepository.com/artifact/com.github.houbb/junitperf)
 [![Build Status](https://www.travis-ci.org/houbb/junitperf.svg)](https://www.travis-ci.org/houbb/junitperf)
 [![Coverage Status](https://coveralls.io/repos/github/houbb/junitperf/badge.svg)](https://coveralls.io/github/houbb/junitperf)
-
 
 ## 为什么使用?
 
@@ -49,7 +48,7 @@ jdk1.8 及其以上版本
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>junitperf</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.3</version>
 </dependency>
 ```
 
@@ -70,7 +69,6 @@ public class HelloWorldTest {
 ```
 
 # 配置说明
-
 
 ## 测试注解指定
 
@@ -182,6 +180,21 @@ public class JunitPerfRequireTest {
 
 ![junitperf-report-html.png](doc/img/junitperf-report-html.png)
 
+# 对于 junit4 的支持
+
+## 引入 jar
+
+```xml
+<dependency>
+    <groupId>com.github.houbb</groupId>
+    <artifactId>junitperf</artifactId>
+    <version>1.0.3</version>
+</dependency>
+```
+
+## 相关文档
+
+[junit4 相关使用](https://github.com/houbb/junitperf/tree/release_1.0.3)
 
 # 友情提示
 
@@ -251,20 +264,10 @@ idea 用户请勾选上图中的选项
 
 [log-integration](https://github.com/houbb/log-integration) 用于日志整合。
 
-[paradise](https://github.com/houbb/paradise) 简单工具类封装。
+[heaven](https://github.com/houbb/heaven) 工具类集合。
 
-# 对于 junit4 的支持
+# 关联开源框架
 
-## 引入 jar
+[data-factory 自动生成测试数据](https://github.com/houbb/data-factory)
 
-```xml
-<dependency>
-    <groupId>com.github.houbb</groupId>
-    <artifactId>junitperf</artifactId>
-    <version>1.0.3</version>
-</dependency>
-```
-
-## 相关文档
-
-[junit4 相关使用](https://github.com/houbb/junitperf/tree/release_1.0.3)
+[data-factory 自动生成测试案例的 maven 插件](https://github.com/houbb/gen-test-plugin)

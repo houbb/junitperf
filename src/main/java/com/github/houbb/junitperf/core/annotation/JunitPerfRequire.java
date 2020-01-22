@@ -1,15 +1,9 @@
 package com.github.houbb.junitperf.core.annotation;
 
 import com.github.houbb.junitperf.constant.VersionConstant;
-
 import org.apiguardian.api.API;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * 对于性能测试来说，所有的要求都应该是消耗时间越低越好。
