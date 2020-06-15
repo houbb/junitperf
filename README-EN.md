@@ -123,7 +123,7 @@ The following methods are supported:
 
 ### @JunitPerfRequire
 
-指定测试时需要达到的要求。(选填项)
+Specify the requirements to be met when testing. (Optional)
 
 | Properties | Description | Type | Default | Remarks |
 |:----|:----|:----|:----|:----|
