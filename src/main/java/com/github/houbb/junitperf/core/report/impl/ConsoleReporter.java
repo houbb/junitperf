@@ -8,9 +8,7 @@ import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
 import com.github.houbb.junitperf.model.evaluation.component.EvaluationConfig;
 import com.github.houbb.junitperf.model.evaluation.component.EvaluationRequire;
 import com.github.houbb.junitperf.model.evaluation.component.EvaluationResult;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-
+import com.github.houbb.junitperf.util.ConsoleUtil;
 import org.apiguardian.api.API;
 
 import java.util.Map;
@@ -29,8 +27,6 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 @API(status = API.Status.INTERNAL, since = VersionConstant.V2_0_0)
 public class ConsoleReporter implements Reporter {
 
-    private static final Log log = LogFactory.getLog(ConsoleReporter.class);
-
     @Override
     public void report(Class testClass, Set<EvaluationContext> evaluationContextSet) {
         for (EvaluationContext context : evaluationContextSet) {
@@ -42,26 +38,26 @@ public class ConsoleReporter implements Reporter {
 
             String throughputStatus = getStatus(evaluationResult.isTimesPerSecondAchieved());
 
-            log.info("Started at:   {}", context.getStartTime());
-            log.info("Invocations:  {}", statistics.getEvaluationCount());
-            log.info("Success:  {}", statistics.getEvaluationCount() - statistics.getErrorCount());
-            log.info("Errors:   {}", statistics.getErrorCount());
-            log.info("Thread Count: {}", evaluationConfig.getConfigThreads());
-            log.info("Warm up:      {}ms", evaluationConfig.getConfigWarmUp());
-            log.info("Execution time: {}ms", evaluationConfig.getConfigDuration());
-            log.info("Throughput:     {}/s (Required: {}/s) - {}",
+            ConsoleUtil.info("Started at:   {}", context.getStartTime());
+            ConsoleUtil.info("Invocations:  {}", statistics.getEvaluationCount());
+            ConsoleUtil.info("Success:  {}", statistics.getEvaluationCount() - statistics.getErrorCount());
+            ConsoleUtil.info("Errors:   {}", statistics.getErrorCount());
+            ConsoleUtil.info("Thread Count: {}", evaluationConfig.getConfigThreads());
+            ConsoleUtil.info("Warm up:      {}ms", evaluationConfig.getConfigWarmUp());
+            ConsoleUtil.info("Execution time: {}ms", evaluationConfig.getConfigDuration());
+            ConsoleUtil.info("Throughput:     {}/s (Required: {}/s) - {}",
                     evaluationResult.getThroughputQps(),
                     evaluationRequire.getRequireTimesPerSecond(),
                     throughputStatus);
-            log.info("Min latency:   {}ms (Required: {}ms) - {}",
+            ConsoleUtil.info("Min latency:   {}ms (Required: {}ms) - {}",
                     statistics.getMinLatency(MILLISECONDS),
                     evaluationRequire.getRequireMin(),
                     getStatus(evaluationResult.isMinAchieved()));
-            log.info("Max latency:    {}ms (Required: {}ms) - {}",
+            ConsoleUtil.info("Max latency:    {}ms (Required: {}ms) - {}",
                     statistics.getMaxLatency(MILLISECONDS),
                     evaluationRequire.getRequireMax(),
                     getStatus(evaluationResult.isMaxAchieved()));
-            log.info("Ave latency:    {}ms (Required: {}ms) - {}",
+            ConsoleUtil.info("Ave latency:    {}ms (Required: {}ms) - {}",
                     statistics.getMeanLatency(MILLISECONDS),
                     evaluationRequire.getRequireAverage(),
                     getStatus(evaluationResult.isAverageAchieved()));
@@ -72,7 +68,7 @@ public class ConsoleReporter implements Reporter {
                 Float threshold = entry.getValue();
                 boolean result = evaluationResult.getIsPercentilesAchievedMap().get(percentile);
                 String percentileStatus = getStatus(result);
-                log.info("Percentile: {}%%    {}ms (Required: {}ms) - {}",
+                ConsoleUtil.info("Percentile: {}%%    {}ms (Required: {}ms) - {}",
                         percentile,
                         statistics.getLatencyPercentile(percentile, MILLISECONDS),
                         threshold,

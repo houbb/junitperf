@@ -1,11 +1,8 @@
 package com.github.houbb.junitperf.util;
 
 import com.github.houbb.junitperf.support.exception.JunitPerfException;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.*;
-
 import org.apiguardian.api.API;
 
 import java.io.*;
@@ -23,11 +20,6 @@ import java.util.Map;
 public final class FreemarkerUtil {
 
     private FreemarkerUtil(){}
-
-    /**    
-     * 日志    
-     */    
-    private static final Log log = LogFactory.getLog(FreemarkerUtil.class);
 
     /**    
      * 组态    
@@ -88,7 +80,6 @@ public final class FreemarkerUtil {
 
         //create parent dir first.
         boolean makeDirs = file.getParentFile().mkdirs();
-        log.debug("create file makeDirs:{}", makeDirs);
 
         if (!file.exists()) {
             result = file.createNewFile();

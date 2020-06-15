@@ -5,9 +5,8 @@ import com.github.houbb.junitperf.constant.VersionConstant;
 import com.github.houbb.junitperf.core.report.Reporter;
 import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
 import com.github.houbb.junitperf.support.i18n.I18N;
+import com.github.houbb.junitperf.util.ConsoleUtil;
 import com.github.houbb.junitperf.util.FreemarkerUtil;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -39,10 +38,6 @@ public class HtmlReporter implements Reporter {
      * 模板文件夹
      */
     private static final String REPORT_TEMPLATE = "/templates/";
-    /**
-     * 日志
-     */
-    private static final Log log = LogFactory.getLog(ConsoleReporter.class);
 
     @Override
     public void report(Class testClass, Set<EvaluationContext> evaluationContextSet) {
@@ -54,7 +49,7 @@ public class HtmlReporter implements Reporter {
 
             Template template = configuration.getTemplate("report.ftl");
             Files.createDirectories(outputPath.getParent());
-            log.info("Rendering report to: " + outputPath);
+            ConsoleUtil.info("Rendering report to: " + outputPath);
 
             Map<String, Object> root = new HashMap<>();
             root.put("className", testClass.getSimpleName());
@@ -63,7 +58,7 @@ public class HtmlReporter implements Reporter {
             root.put("i18n", I18N.buildI18nVo());
             FreemarkerUtil.createFile(template, outputPath.toString(), root, true);
         } catch (Exception e) {
-            log.error("HtmlReporter meet ex: {}", e, e);
+            ConsoleUtil.info("HtmlReporter meet ex: {}", e, e);
         }
     }
 

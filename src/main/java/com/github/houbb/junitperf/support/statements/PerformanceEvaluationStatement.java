@@ -9,23 +9,14 @@ import com.github.houbb.junitperf.model.evaluation.component.EvaluationConfig;
 import com.github.houbb.junitperf.support.exception.JunitPerfRuntimeException;
 import com.github.houbb.junitperf.support.i18n.I18N;
 import com.github.houbb.junitperf.support.task.PerformanceEvaluationTask;
-import com.github.houbb.log.integration.core.Log;
-import com.github.houbb.log.integration.core.LogFactory;
-
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-
 import org.apiguardian.api.API;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.*;
 
 /**
  * 性能测试 statement
@@ -36,8 +27,6 @@ import java.util.concurrent.ThreadFactory;
  */
 @API(status = API.Status.INTERNAL, since = VersionConstant.V2_0_0)
 public class PerformanceEvaluationStatement {
-
-    private static final Log LOG = LogFactory.getLog(PerformanceEvaluationStatement.class);
 
     private static final String        THREAD_NAME_PATTERN = "performance-evaluation-thread-%d";
     private static final ThreadFactory FACTORY             = new ThreadFactoryBuilder().setNameFormat(THREAD_NAME_PATTERN).build();
@@ -110,7 +99,6 @@ public class PerformanceEvaluationStatement {
         //1. 列表为空
         if(reporterSet.isEmpty()) {
             final String info = I18N.get(I18N.Key.reportIsEmpty);
-            LOG.warn(testClass + ": " + info);
         }
 
         //2. 是否为只有单个文件

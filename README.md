@@ -1,10 +1,13 @@
 # junitperf
 
+> [README-ENGLISH](README-EN.md)
+
 [junitperf](https://github.com/houbb/junitperf) 是一款为 java 开发者设计的性能测试框架。
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.houbb/junitperf/badge.svg)](http://mvnrepository.com/artifact/com.github.houbb/junitperf)
 [![Build Status](https://www.travis-ci.org/houbb/junitperf.svg)](https://www.travis-ci.org/houbb/junitperf)
-[![Coverage Status](https://coveralls.io/repos/github/houbb/junitperf/badge.svg)](https://coveralls.io/github/houbb/junitperf)
+[![](https://img.shields.io/badge/license-Apache2-FF0080.svg)](https://github.com/houbb/junitperf/blob/master/LICENSE.txt)
+[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/houbb/junitperf)
 
 ## 为什么使用?
 
@@ -20,43 +23,43 @@
 
 - 支持多种报告生成方式，支持自定义
 
-- Junt5 完美支持，便于 Java 开发者使用。
+- Junt5 完美支持，便于 Java 开发者使用
 
 ## 变更记录
 
 [变更日志](CHANGELOG.md)
 
+### v2.0.4 主要变更
+
+1. 移除对于 log-integration 的依赖
+
+2. 文档优化
+
 # 快速开始
 
 ## 项目依赖
 
-- jdk
+- jdk1.8 及其以上版本
 
-jdk1.8 及其以上版本
+- [Junit5](https://junit.org/junit5/) 及其以上版本
 
-- junit
-
-[Junit5](https://junit.org/junit5/) 及其以上版本
-
-## 入门案例
-
-[入门案例地址](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/HelloWorldTest.java)
-
-- jar 包引入
+## maven 导入
 
 ```xml
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>junitperf</artifactId>
-    <version>2.0.3</version>
+    <version>2.0.4</version>
 </dependency>
 ```
+
+## 入门案例
+
+> [入门案例地址](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/HelloWorldTest.java)
 
 - 使用例子
 
 ```java
-import com.github.houbb.junitperf.core.annotation.JunitPerfConfig;
-
 public class HelloWorldTest {
 
     @JunitPerfConfig(duration = 1000)
@@ -116,8 +119,6 @@ public class JunitPerfConfigTest {
 | HTML | [HtmlReporterTest](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/report/HtmlReporterTest.java) |
 | 组合方式 | [MultiReporterTest](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/report/MultiReporterTest.java) |
 | 自定义方式 | [DefineReporterTest](https://github.com/houbb/junitperf/blob/master/src/test/java/com/github/houbb/junitperf/examples/report/DefineReporterTest.java) |
-
-
 
 ### @JunitPerfRequire
 
@@ -210,64 +211,13 @@ idea 用户请勾选上图中的选项
 
 ![idea-proerties-ascii.png](doc/img/idea-proerties-ascii.png)
 
-
-
-# 特别鸣谢
-
-## 缘由
-
-在看性能测试相关内容时发现这类框架(Junit 性能测试框架)。
-
-个人初步参考以下2个项目进行实现，后续可能走完全不同的路线。
-
-- junitperf
-
-[junitperf](https://github.com/noconnor/JUnitPerf)
-
-优点：实现简洁
-
-缺点：(对个人而言)
-
-使用 Jdk1.8 实现，本项目调整为 Jdk1.7，后续 V2.0 将直接升级为 Jdk1.8+;
-
-使用 [Gradle](https://gradle.org/) 作为 jar 管理，个人习惯于 [Maven](http://maven.apache.org);
-
-存在 bug(线程打断问题20180115)，且更新不是特别活跃。
-
-- contiperf
-
-[contiperf](https://github.com/lucaspouzac/contiperf)
-
-优点：功能完善
-
-缺点：好像已经停止更新了。且代码较为晦涩。
-
-## 技术支持
-
-- Junit
-
-[Junit Rules](https://github.com/junit-team/junit4/wiki/Rules)
-
-- 数据统计
-
-[Apache Commons math](http://commons.apache.org/proper/commons-math/userguide/stat.html#a1.2_Descriptive_statistics)
-
-- 报告生成
-
-[Freemarker](https://freemarker.apache.org/)
-
-- 工具类
-
-[Guava](https://github.com/google/guava)
-
-- 二方库
-
-[log-integration](https://github.com/houbb/log-integration) 用于日志整合。
-
-[heaven](https://github.com/houbb/heaven) 工具类集合。
-
 # 关联开源框架
 
 [data-factory 自动生成测试数据](https://github.com/houbb/data-factory)
 
 [gen-test-plugin 自动生成测试案例的 maven 插件](https://github.com/houbb/gen-test-plugin)
+
+# 后期 Road-MAP
+
+- [ ] 内存使用统计
+
