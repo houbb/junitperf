@@ -82,8 +82,8 @@ config for test
 | Attr | Desc | Type | Default | Remark |
 |:----|:----|:----|:----|:----|
 | threads | How many threads are used to execute | int | 1 | |
-| warmUp | Preparation time | long | 0 | 单位：毫秒 |
-| duration | Execution time | long | 60_000(1分钟) | 单位：毫秒 |
+| warmUp | Preparation time | long | 0 | Unit：mills |
+| duration | Execution time | long | 60_000(1 min) | Unit：mills |
 | statistics | Statistics impl | StatisticsCalculator | DefaultStatisticsCalculator |  |
 | reporter | Reporter impl | Reporter | ConsoleReporter |  |
 
