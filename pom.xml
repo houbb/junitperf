@@ -35,7 +35,7 @@
         <junit.version>5.2.0</junit.version>
         <freemarker.version>2.3.23</freemarker.version>
         <google.guava.version>21.0</google.guava.version>
-        <lucene-core.version>4.0.0</lucene-core.version>
+        <lucene-core.version>7.1.0</lucene-core.version>
 
         <!--sonar-->
         <sonar.java.binaries>target/classes</sonar.java.binaries>
