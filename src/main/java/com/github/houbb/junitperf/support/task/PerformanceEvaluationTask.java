@@ -68,8 +68,8 @@ public class PerformanceEvaluationTask implements Runnable {
         long startTimeNs = System.nanoTime();
         long startMeasurements = startTimeNs + warmUpNs;
 
-        // 测试对象实例
-        long memoryKb = RamUsageEstimator.sizeOf(testInstance);
+        // 堆大小
+        long memoryKb = RamUsageEstimator.shallowSizeOf(testInstance);
         statisticsCalculator.setMemory(memoryKb);
 
         while (isContinue) {
