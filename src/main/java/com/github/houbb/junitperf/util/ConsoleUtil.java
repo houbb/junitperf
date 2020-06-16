@@ -28,6 +28,8 @@ public final class ConsoleUtil {
 
     /**
      * 输出文档
+     * @param className 类名
+     * @param methodName 方法名
      * @param format 文本格式化
      * @param args 参数
      * @since 2.0.4
