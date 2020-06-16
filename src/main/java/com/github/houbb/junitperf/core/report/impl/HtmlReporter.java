@@ -15,6 +15,7 @@ import org.apiguardian.api.API;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -40,7 +41,7 @@ public class HtmlReporter implements Reporter {
     private static final String REPORT_TEMPLATE = "/templates/";
 
     @Override
-    public void report(Class testClass, Set<EvaluationContext> evaluationContextSet) {
+    public void report(Class testClass, Collection<EvaluationContext> evaluationContextSet) {
         Path outputPath = Paths.get(DEFAULT_REPORT_PACKAGE + PathUtil.packageToPath(testClass.getName())+".html");
         try {
             Configuration configuration = FreemarkerUtil.getConfiguration("UTF-8");

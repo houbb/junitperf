@@ -4,7 +4,7 @@
 
     <groupId>com.github.houbb</groupId>
     <artifactId>junitperf</artifactId>
-    <version>2.0.6-SNAPSHOT</version>
+    <version>2.0.6</version>
 
     <properties>
         <!--============================== All Plugins START ==============================-->
@@ -32,7 +32,7 @@
 
         <!--============================== OTHER ==============================-->
         <commons-math3.version>3.6.1</commons-math3.version>
-        <junit.version>5.2.0</junit.version>
+        <junit.version>5.6.2</junit.version>
         <freemarker.version>2.3.23</freemarker.version>
         <google.guava.version>29.0-jre</google.guava.version>
         <lucene-core.version>7.1.0</lucene-core.version>
@@ -76,6 +76,11 @@
                 <artifactId>junit-jupiter-engine</artifactId>
                 <version>${junit.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.apache.lucene</groupId>
@@ -113,6 +118,10 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
         </dependency>
 
         <dependency>

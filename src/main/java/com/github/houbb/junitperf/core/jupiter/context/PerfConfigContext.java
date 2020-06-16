@@ -17,10 +17,7 @@ import org.junit.jupiter.api.extension.TestInstancePostProcessor;
 import org.junit.jupiter.api.extension.TestTemplateInvocationContext;
 
 import java.lang.reflect.Method;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -39,7 +36,7 @@ public class PerfConfigContext implements TestTemplateInvocationContext {
     /**
      * 用于存储上下文
      */
-    private static final ConcurrentHashMap<Class, Set<EvaluationContext>> ACTIVE_CONTEXTS = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<Class, List<EvaluationContext>> ACTIVE_CONTEXTS = new ConcurrentHashMap<>();
     private final        Method                                           method;
     private              JunitPerfConfig                                  perfConfig;
     private              JunitPerfRequire                                 perfRequire;
@@ -57,7 +54,7 @@ public class PerfConfigContext implements TestTemplateInvocationContext {
                 (TestInstancePostProcessor) (testInstance, context) -> {
                     final Class clazz = testInstance.getClass();
                     // Group test contexts by test class
-                    ACTIVE_CONTEXTS.putIfAbsent(clazz, new HashSet<>());
+                    ACTIVE_CONTEXTS.putIfAbsent(clazz, new ArrayList<>());
 
                     EvaluationContext evaluationContext = new EvaluationContext(testInstance,
                             method,

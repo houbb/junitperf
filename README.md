@@ -29,9 +29,15 @@
 
 [变更日志](CHANGELOG.md)
 
-### v2.0.5 主要变更
+### v2.0.6 主要变更
 
-1. 新增内存消耗特性
+1. 升级 junit5 版本
+
+2. 优化页面显示
+
+3. 支持展示与方法声明顺序相同
+
+4. 日志输出优化
 
 # 快速开始
 
@@ -47,7 +53,7 @@
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>junitperf</artifactId>
-    <version>2.0.5</version>
+    <version>2.0.6</version>
 </dependency>
 ```
 
@@ -158,18 +164,18 @@ public class JunitPerfRequireTest {
 大致如下：
 
 ```
-[INFO] 2018-01-14 22:16:31.419 [] - Started at:   2018-01-14 22:16:30.194
-[INFO] 2018-01-14 22:16:31.419 [] - Invocations:  10
-[INFO] 2018-01-14 22:16:31.420 [] - Success:  10
-[INFO] 2018-01-14 22:16:31.420 [] - Errors:   0
-[INFO] 2018-01-14 22:16:31.420 [] - Thread Count: 2
-[INFO] 2018-01-14 22:16:31.421 [] - Warm up:      0ms
-[INFO] 2018-01-14 22:16:31.421 [] - Execution time: 1000ms
-[INFO] 2018-01-14 22:16:31.421 [] - Throughput:     10/s (Required: -1/s) - PASSED
-[INFO] 2018-01-14 22:16:31.424 [] - Min latency:   200.2112ms (Required: -1.0ms) - PASSED
-[INFO] 2018-01-14 22:16:31.424 [] - Max latency:    205.67862ms (Required: -1.0ms) - PASSED
-[INFO] 2018-01-14 22:16:31.425 [] - Ave latency:    202.97829ms (Required: -1.0ms) - PASSED
-[INFO] 2018-01-14 22:16:31.425 [] - Memory cost:   16byte
+[INFO] [2020-06-16 20:05:53.618] [c.g.h.j.e.HelloWorldTest.helloTest] - Started at:  2020-06-16 20:05:52.512
+[INFO] [2020-06-16 20:05:53.619] [c.g.h.j.e.HelloWorldTest.helloTest] - Invocations:  9
+[INFO] [2020-06-16 20:05:53.620] [c.g.h.j.e.HelloWorldTest.helloTest] - Success:  9
+[INFO] [2020-06-16 20:05:53.620] [c.g.h.j.e.HelloWorldTest.helloTest] - Errors:  0
+[INFO] [2020-06-16 20:05:53.621] [c.g.h.j.e.HelloWorldTest.helloTest] - Thread Count:  1
+[INFO] [2020-06-16 20:05:53.623] [c.g.h.j.e.HelloWorldTest.helloTest] - Warm up:  0ms
+[INFO] [2020-06-16 20:05:53.623] [c.g.h.j.e.HelloWorldTest.helloTest] - Execution time:  1000ms
+[INFO] [2020-06-16 20:05:53.624] [c.g.h.j.e.HelloWorldTest.helloTest] - Throughput:  9/s (Required: -1/s) - PASSED
+[INFO] [2020-06-16 20:05:53.625] [c.g.h.j.e.HelloWorldTest.helloTest] - Memory cost:  16byte
+[INFO] [2020-06-16 20:05:53.635] [c.g.h.j.e.HelloWorldTest.helloTest] - Min latency:  100.191414ms (Required: -1.0ms) - PASSED
+[INFO] [2020-06-16 20:05:53.635] [c.g.h.j.e.HelloWorldTest.helloTest] - Max latency:  105.2382ms (Required: -1.0ms) - PASSED
+[INFO] [2020-06-16 20:05:53.636] [c.g.h.j.e.HelloWorldTest.helloTest] - Avg latency:  101.43268ms (Required: -1.0ms) - PASSED
 ```
 
 ### HTML 方式
@@ -179,6 +185,20 @@ public class JunitPerfRequireTest {
 后期会进行样式调整。
 
 ![junitperf-report-html.png](doc/img/junitperf-report-html.png)
+
+# 指定方法执行顺序
+
+## 说明
+
+方法的执行顺序会影响到最终的报告显示顺序。
+
+如果你想严格指定同一个类方法的执行顺序，推荐使用 [Test Execution Order](https://junit.org/junit5/docs/current/user-guide/#writing-tests-test-execution-order) 的方式。
+
+`@TestMethodOrder` 需要 junit5 在 5.4 及其以后版本
+
+## 示例代码
+
+参考 [OrderedHtmlTest](https://github.com/houbb/junitperf/tree/master/src/test/java/com/github/houbb/junitperf/examples/OrderedHtmlTest.java)
 
 # 对于 junit4 的支持
 

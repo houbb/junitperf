@@ -6,6 +6,8 @@ import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
 
 import org.apiguardian.api.API;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -22,6 +24,6 @@ public interface Reporter {
      * @param testClass 测试类 class 相关信息
      * @param evaluationContextSet 评价集合
      */
-    void report(Class testClass, Set<EvaluationContext> evaluationContextSet);
+    void report(Class testClass, Collection<EvaluationContext> evaluationContextSet);
 
 }

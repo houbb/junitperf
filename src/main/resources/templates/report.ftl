@@ -49,30 +49,31 @@
         }
 
         section aside {
-            float: left;
-            width: 220px;
+            width: 250px;
             border: rgb(238, 239, 237) 1px solid;
             background: #fff;
-            min-height: 580px;
-            /*position: relative;*/
-            /*margin-right: 40px;*/
+            height: 500px;
+            position: fixed;
+            overflow: auto;
         }
 
         aside .list-group ul {
             list-style: none;
-            width: 200px;
+            width: 230px;
             margin: 6px auto;
             background: rgb(248, 246, 243);
             padding: 0;
-            overflow: auto;
+            overflow: hidden;
         }
 
         aside .list-group li {
             border-bottom: rgb(238, 239, 237) 1px solid;
             height: 35px;
             line-height: 35px;
-            text-align: center;
+            font-size: 12px;
+            text-align: left;
         }
+
         aside .list-group li:hover {
             color: #111111;
         }
@@ -107,7 +108,7 @@
 
         section .main-wrapper {
             float: left;
-            margin-left: 40px;
+            margin-left: 300px;
         }
 
         section .test-method {
@@ -131,6 +132,7 @@
             width: 400px;
             height: 400px;
             margin: 0 auto;
+            padding-top: 20px;
         }
 
         section .data-wrapper {
@@ -187,12 +189,12 @@
                 <#list contextData as context>
                     <#assign active = (context_index==0) ? string("active", "")>
                     <#if context.evaluationResult.isSuccessful()>
-                        <li class="borderRightSuccess ${active}"><a
-                                href='#${context.methodName}'>${context.methodName}</a>
+                        <li title="${context.methodName}" class="borderRightSuccess ${active}">
+                            <a href='#${context.methodName}'>${context.methodName}</a>
                         </li>
                     <#else>
-                        <li class="borderRightFail ${active}"><a
-                                href='#${context.methodName}'>${context.methodName}</a>
+                        <li title="${context.methodName}" class="borderRightFail ${active}">
+                            <a href='#${context.methodName}'>${context.methodName}</a>
                         </li>
                     </#if>
                 </#list>
@@ -205,7 +207,7 @@
     <#list contextData as context>
 
         <div id="${context.methodName}" class="test-method">
-            <span class="test-method-name">${context.methodName}</span>
+            <span title="${context.methodName}" class="test-method-name">${context.methodName}</span>
 
             <div id="${context.methodName}-img" class="test-method-img">
                 <!-- ADD scatter Chart here!! -->

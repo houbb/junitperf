@@ -12,10 +12,7 @@ import com.github.houbb.junitperf.support.task.PerformanceEvaluationTask;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.apiguardian.api.API;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -34,7 +31,7 @@ public class PerformanceEvaluationStatement {
     private final EvaluationContext      evaluationContext;
     private final StatisticsCalculator   statisticsCalculator;
     private final Set<Reporter>          reporterSet;
-    private final Set<EvaluationContext> evaluationContextSet;
+    private final Collection<EvaluationContext> evaluationContextList;
     private final Class                  testClass;
 
     /**
@@ -43,18 +40,18 @@ public class PerformanceEvaluationStatement {
      * @param evaluationContext    上下文
      * @param statisticsCalculator 统计
      * @param reporterSet          报告方式
-     * @param evaluationContextSet 上下文
+     * @param evaluationContextList 上下文
      * @param testClass            当前测试 class 信息
      */
     public PerformanceEvaluationStatement(EvaluationContext evaluationContext,
                                           StatisticsCalculator statisticsCalculator,
                                           Set<Reporter> reporterSet,
-                                          Set<EvaluationContext> evaluationContextSet,
+                                          Collection<EvaluationContext> evaluationContextList,
                                           final Class testClass) {
         this.evaluationContext = evaluationContext;
         this.statisticsCalculator = statisticsCalculator;
         this.reporterSet = reporterSet;
-        this.evaluationContextSet = evaluationContextSet;
+        this.evaluationContextList = evaluationContextList;
         this.testClass = testClass;
     }
 
@@ -101,35 +98,35 @@ public class PerformanceEvaluationStatement {
             final String info = I18N.get(I18N.Key.reportIsEmpty);
         }
 
-        //2. 是否为只有单个文件
         int bestThreadNum = ThreadUtil.bestThreadNum(reporterSet.size());
         if(bestThreadNum <= 1) {
+            //2. 是否为只有单个文件
             final Reporter reporter = reporterSet.iterator().next();
-            reporter.report(testClass, evaluationContextSet);
-        }
+            reporter.report(testClass, evaluationContextList);
+        } else {
+            //3. 线程池
+            ExecutorService executorService = Executors.newFixedThreadPool(bestThreadNum);
 
-        //3. 线程池
-        ExecutorService executorService = Executors.newFixedThreadPool(bestThreadNum);
+            List<Future<Void>> futureTasks = new ArrayList<>();
+            for(final Reporter reporter : reporterSet) {
+                Callable<Void> tocGenCallable = () -> {
+                    reporter.report(testClass, evaluationContextList);
+                    return null;
+                };
 
-        List<Future<Void>> futureTasks = new ArrayList<>();
-        for(final Reporter reporter : reporterSet) {
-            Callable<Void> tocGenCallable = () -> {
-                reporter.report(testClass, evaluationContextSet);
-                return null;
-            };
-
-            Future<Void> reporterFuture = executorService.submit(tocGenCallable);
-            futureTasks.add(reporterFuture);
-        }
-        executorService.shutdown();
-
-        try {
-            for(Future<Void> reporterFuture : futureTasks) {
-                Void aVoid = reporterFuture.get();
+                Future<Void> reporterFuture = executorService.submit(tocGenCallable);
+                futureTasks.add(reporterFuture);
             }
-        } catch (InterruptedException | ExecutionException e) {
-            Thread.currentThread().interrupt();
-            throw new JunitPerfRuntimeException(e);
+            executorService.shutdown();
+
+            try {
+                for(Future<Void> reporterFuture : futureTasks) {
+                    Void aVoid = reporterFuture.get();
+                }
+            } catch (InterruptedException | ExecutionException e) {
+                Thread.currentThread().interrupt();
+                throw new JunitPerfRuntimeException(e);
+            }
         }
     }
 

@@ -11,6 +11,7 @@ import com.github.houbb.junitperf.model.evaluation.component.EvaluationResult;
 import com.github.houbb.junitperf.util.ConsoleUtil;
 import org.apiguardian.api.API;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 public class ConsoleReporter implements Reporter {
 
     @Override
-    public void report(Class testClass, Set<EvaluationContext> evaluationContextSet) {
+    public void report(Class testClass, Collection<EvaluationContext> evaluationContextSet) {
         for (EvaluationContext context : evaluationContextSet) {
 
             StatisticsCalculator statistics = context.getStatisticsCalculator();
@@ -38,56 +39,64 @@ public class ConsoleReporter implements Reporter {
 
             String throughputStatus = getStatus(evaluationResult.isTimesPerSecondAchieved());
 
-            ConsoleUtil.info("Started at:   {}", context.getStartTime());
-            ConsoleUtil.info("Invocations:  {}", statistics.getEvaluationCount());
-            ConsoleUtil.info("Success:  {}", statistics.getEvaluationCount() - statistics.getErrorCount());
-            ConsoleUtil.info("Errors:   {}", statistics.getErrorCount());
-            ConsoleUtil.info("Thread Count: {}", evaluationConfig.getConfigThreads());
-            ConsoleUtil.info("Warm up:      {}ms", evaluationConfig.getConfigWarmUp());
-            ConsoleUtil.info("Execution time: {}ms", evaluationConfig.getConfigDuration());
-            ConsoleUtil.info("Throughput:     {}/s (Required: {}/s) - {}",
+            infoLog(context, ConsoleUtil.LINE);
+            infoLog(context, "Started at:  {}", context.getStartTime());
+            infoLog(context, "Invocations:  {}", statistics.getEvaluationCount());
+            infoLog(context,"Success:  {}", statistics.getEvaluationCount() - statistics.getErrorCount());
+            infoLog(context,"Errors:  {}", statistics.getErrorCount());
+            infoLog(context,"Thread Count:  {}", evaluationConfig.getConfigThreads());
+            infoLog(context,"Warm up:  {}ms", evaluationConfig.getConfigWarmUp());
+            infoLog(context,"Execution time:  {}ms", evaluationConfig.getConfigDuration());
+            infoLog(context,"Throughput:  {}/s (Required: {}/s) - {}",
                     evaluationResult.getThroughputQps(),
                     evaluationRequire.getRequireTimesPerSecond(),
                     throughputStatus);
-            ConsoleUtil.info("Min latency:   {}ms (Required: {}ms) - {}",
+            // 内存
+            infoLog(context,"Memory cost:  {}byte", statistics.getMemory());
+
+            infoLog(context,"Min latency:  {}ms (Required: {}ms) - {}",
                     statistics.getMinLatency(MILLISECONDS),
                     evaluationRequire.getRequireMin(),
                     getStatus(evaluationResult.isMinAchieved()));
-            ConsoleUtil.info("Max latency:    {}ms (Required: {}ms) - {}",
+            infoLog(context,"Max latency:  {}ms (Required: {}ms) - {}",
                     statistics.getMaxLatency(MILLISECONDS),
                     evaluationRequire.getRequireMax(),
                     getStatus(evaluationResult.isMaxAchieved()));
-            ConsoleUtil.info("Avg latency:    {}ms (Required: {}ms) - {}",
+            infoLog(context,"Avg latency:  {}ms (Required: {}ms) - {}",
                     statistics.getMeanLatency(MILLISECONDS),
                     evaluationRequire.getRequireAverage(),
                     getStatus(evaluationResult.isAverageAchieved()));
-
-            // 输出内存信息
-            reportMemory(statistics);
 
             for (Map.Entry<Integer, Float> entry : evaluationRequire.getRequirePercentilesMap().entrySet()) {
                 Integer percentile = entry.getKey();
                 Float threshold = entry.getValue();
                 boolean result = evaluationResult.getIsPercentilesAchievedMap().get(percentile);
                 String percentileStatus = getStatus(result);
-                ConsoleUtil.info("Percentile: {}%%    {}ms (Required: {}ms) - {}",
+                infoLog(context,"Percentile: {}%%   {}ms (Required: {}ms) - {}",
                         percentile,
                         statistics.getLatencyPercentile(percentile, MILLISECONDS),
                         threshold,
                         percentileStatus);
 
             }
+            infoLog(context, ConsoleUtil.LINE);
         }
     }
 
     /**
-     * 输出内存消耗信息
-     * @param statistics 统计信息
-     * @since 2.0.5
+     * 日志输出
+     * @param context 上下文
+     * @param format 格式化
+     * @param args 参数
+     * @since 2.0.6
      */
-    private void reportMemory(final StatisticsCalculator statistics) {
-        // 内存
-        ConsoleUtil.info("Memory cost:   {}byte", statistics.getMemory());
+    private void infoLog(final EvaluationContext context,
+                     final String format,
+                     final Object... args) {
+        String className = context.getTestInstance().getClass().getName();
+        String methodName = context.getMethodName();
+
+        ConsoleUtil.info(className, methodName, format, args);
     }
 
     /**

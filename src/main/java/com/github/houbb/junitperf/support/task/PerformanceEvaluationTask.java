@@ -1,11 +1,9 @@
 package com.github.houbb.junitperf.support.task;
 
 import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
-
 import org.apache.lucene.util.RamUsageEstimator;
 import org.apiguardian.api.API;
 
-import java.lang.management.MemoryUsage;
 import java.lang.reflect.Method;
 
 import static java.lang.System.nanoTime;
