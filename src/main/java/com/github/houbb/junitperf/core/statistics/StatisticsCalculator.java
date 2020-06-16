@@ -78,4 +78,18 @@ public interface StatisticsCalculator extends Serializable {
      */
     float getMeanLatency(TimeUnit unit);
 
+    /**
+     * 添加内存
+     * @param memoryKb 内存消耗
+     * @since 2.0.5
+     */
+    void setMemory(final long memoryKb);
+
+    /**
+     * 获取内存的消耗
+     * @return 内存消耗
+     * @since 2.0.5
+     */
+    long getMemory();
+
 }

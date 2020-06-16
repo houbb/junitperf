@@ -22,9 +22,10 @@ public class DefaultStatisticsCalculator implements StatisticsCalculator {
 
     //region private fields
     /**
-     * 统计方式
+     * 耗时统计方式
+     * @since 1.0.0
      */
-    private final DescriptiveStatistics statistics;
+    private final DescriptiveStatistics latencyStatistics;
 
     /**
      * 执行评价计数
@@ -35,22 +36,38 @@ public class DefaultStatisticsCalculator implements StatisticsCalculator {
      * 错误计数
      */
     private final AtomicLong errorCount = new AtomicLong();
+
+    /**
+     * 内存消耗
+     * @since 2.0.5
+     */
+    private volatile long memoryKb;
+
     //endregion
 
     //region constructor
+    /**
+     * 默认构造器
+     * @since 2.0.5
+     */
     public DefaultStatisticsCalculator() {
         this(new SynchronizedDescriptiveStatistics());
     }
 
-    public DefaultStatisticsCalculator(DescriptiveStatistics statistics) {
-        this.statistics = statistics;
+    /**
+     * 私有构造器
+     * @param latencyStatistics 延迟统计
+     * @since 1.0.0
+     */
+    private DefaultStatisticsCalculator(final DescriptiveStatistics latencyStatistics) {
+        this.latencyStatistics = latencyStatistics;
     }
     //endregion
 
     //region methods
     @Override
     public void addLatencyMeasurement(long executionTimeNs) {
-        statistics.addValue(executionTimeNs);
+        latencyStatistics.addValue(executionTimeNs);
     }
 
     @Override
@@ -80,22 +97,32 @@ public class DefaultStatisticsCalculator implements StatisticsCalculator {
 
     @Override
     public float getLatencyPercentile(int percentile, TimeUnit unit) {
-        return (float)statistics.getPercentile((double)(percentile)) / unit.toNanos(1);
+        return (float) latencyStatistics.getPercentile((double)(percentile)) / unit.toNanos(1);
     }
 
     @Override
     public float getMaxLatency(TimeUnit unit) {
-        return (float)statistics.getMax() / unit.toNanos(1);
+        return (float) latencyStatistics.getMax() / unit.toNanos(1);
     }
 
     @Override
     public float getMinLatency(TimeUnit unit) {
-        return (float)statistics.getMin() / unit.toNanos(1);
+        return (float) latencyStatistics.getMin() / unit.toNanos(1);
     }
 
     @Override
     public float getMeanLatency(TimeUnit unit) {
-        return (float)statistics.getMean() / unit.toNanos(1);
+        return (float) latencyStatistics.getMean() / unit.toNanos(1);
+    }
+
+    @Override
+    public void setMemory(long memoryKb) {
+        this.memoryKb = memoryKb;
+    }
+
+    @Override
+    public long getMemory() {
+        return this.memoryKb;
     }
     //endregion
 

@@ -89,13 +89,13 @@ public class PerformanceEvaluationStatement {
 
         evaluationContext.setStatisticsCalculator(statisticsCalculator);
         evaluationContext.runValidation();
-        generateReportor();
+        generateReporter();
     }
 
     /**
      * 报告生成
      */
-    private synchronized void generateReportor() {
+    private synchronized void generateReporter() {
         //1. 列表为空
         if(reporterSet.isEmpty()) {
             final String info = I18N.get(I18N.Key.reportIsEmpty);
@@ -128,6 +128,7 @@ public class PerformanceEvaluationStatement {
                 Void aVoid = reporterFuture.get();
             }
         } catch (InterruptedException | ExecutionException e) {
+            Thread.currentThread().interrupt();
             throw new JunitPerfRuntimeException(e);
         }
     }

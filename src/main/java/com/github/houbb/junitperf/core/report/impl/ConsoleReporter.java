@@ -57,11 +57,13 @@ public class ConsoleReporter implements Reporter {
                     statistics.getMaxLatency(MILLISECONDS),
                     evaluationRequire.getRequireMax(),
                     getStatus(evaluationResult.isMaxAchieved()));
-            ConsoleUtil.info("Ave latency:    {}ms (Required: {}ms) - {}",
+            ConsoleUtil.info("Avg latency:    {}ms (Required: {}ms) - {}",
                     statistics.getMeanLatency(MILLISECONDS),
                     evaluationRequire.getRequireAverage(),
                     getStatus(evaluationResult.isAverageAchieved()));
 
+            // 输出内存信息
+            reportMemory(statistics);
 
             for (Map.Entry<Integer, Float> entry : evaluationRequire.getRequirePercentilesMap().entrySet()) {
                 Integer percentile = entry.getKey();
@@ -78,6 +80,15 @@ public class ConsoleReporter implements Reporter {
         }
     }
 
+    /**
+     * 输出内存消耗信息
+     * @param statistics 统计信息
+     * @since 2.0.5
+     */
+    private void reportMemory(final StatisticsCalculator statistics) {
+        // 内存
+        ConsoleUtil.info("Memory cost:   {}byte", statistics.getMemory());
+    }
 
     /**
      * 获取状态

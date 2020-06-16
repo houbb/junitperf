@@ -252,6 +252,8 @@
                         <li><label>${i18n.execution_time}
                             : </label><span>${context.evaluationConfig.configDuration} ms</span>
                         </li>
+                        <li><label>${i18n.memory}: </label><span>${context.statisticsCalculator.memory} byte</span>
+                        </li>
                         <li><label>${i18n.started_at}: </label><span>${context.startTime}</span>
                         </li>
                     </ul>

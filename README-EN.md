@@ -29,11 +29,9 @@
 
 [CHANGELOG](CHANGELOG.md)
 
-### v2.0.4 major change
+### v2.0.5 major change
 
-1. remove log-integration dependency
-
-2. doc optimize
+1. new feature for memory cost
 
 # Quick Start
 
@@ -49,7 +47,7 @@
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>junitperf</artifactId>
-    <version>2.0.4</version>
+    <version>2.0.5</version>
 </dependency>
 ```
 
@@ -84,7 +82,7 @@ config for test
 | threads | How many threads are used to execute | int | 1 | |
 | warmUp | Preparation time | long | 0 | Unit：mills |
 | duration | Execution time | long | 60_000(1 min) | Unit：mills |
-| statistics | Statistics impl | StatisticsCalculator | DefaultStatisticsCalculator |  |
+| latencyStatistics | Statistics impl | StatisticsCalculator | DefaultStatisticsCalculator |  |
 | reporter | Reporter impl | Reporter | ConsoleReporter |  |
 
 as following：
@@ -109,7 +107,7 @@ public class JunitPerfConfigTest {
 
 ### Reporter types
 
-This is mainly the **output method** for performance test statistics.
+This is mainly the **output method** for performance test latencyStatistics.
 
 The following methods are supported:
 
@@ -190,4 +188,4 @@ Later, style adjustments will be made.
 
 # Road-MAP
 
-- [ ] Memory usage statistics
+- [ ] Memory usage latencyStatistics

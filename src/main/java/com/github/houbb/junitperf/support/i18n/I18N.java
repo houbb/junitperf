@@ -40,6 +40,7 @@ public class I18N {
     }
 
     public static class Key {
+        public static final String memory = "memory";
         public static final String warm_up = "warm_up";
         public static final String max_latency = "max_latency";
         public static final String min_latency = "min_latency";
@@ -65,6 +66,8 @@ public class I18N {
 
     /**
      * 构建 18n 对象
+     *
+     * ps: 这里其实可以用反射重新构建，简化代码
      * @return 对象
      */
     public static I18nVo buildI18nVo() {
@@ -87,6 +90,7 @@ public class I18N {
         vo.setMax_latency(get(Key.max_latency));
         vo.setMin_latency(get(Key.min_latency));
         vo.setAvg_latency(get(Key.avg_latency));
+        vo.setMemory(get(Key.memory));
         return vo;
     }
 

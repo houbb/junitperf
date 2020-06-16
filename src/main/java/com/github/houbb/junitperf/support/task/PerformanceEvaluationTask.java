@@ -2,8 +2,10 @@ package com.github.houbb.junitperf.support.task;
 
 import com.github.houbb.junitperf.core.statistics.StatisticsCalculator;
 
+import org.apache.lucene.util.RamUsageEstimator;
 import org.apiguardian.api.API;
 
+import java.lang.management.MemoryUsage;
 import java.lang.reflect.Method;
 
 import static java.lang.System.nanoTime;
@@ -43,7 +45,14 @@ public class PerformanceEvaluationTask implements Runnable {
      */
     private final Method testMethod;
 
-
+    /**
+     * 构造器
+     * @param warmUpNs 准备时间
+     * @param statisticsCalculator 统计
+     * @param testInstance 测试实例
+     * @param testMethod 测试方法
+     * @since 1.0.0
+     */
     public PerformanceEvaluationTask(long warmUpNs, StatisticsCalculator statisticsCalculator,
                                      Object testInstance, Method testMethod) {
         this.warmUpNs = warmUpNs;
@@ -58,6 +67,11 @@ public class PerformanceEvaluationTask implements Runnable {
     public void run() {
         long startTimeNs = System.nanoTime();
         long startMeasurements = startTimeNs + warmUpNs;
+
+        // 测试对象实例
+        long memoryKb = RamUsageEstimator.sizeOf(testInstance);
+        statisticsCalculator.setMemory(memoryKb);
+
         while (isContinue) {
             evaluateStatement(startMeasurements);
         }
@@ -78,21 +92,32 @@ public class PerformanceEvaluationTask implements Runnable {
         if (nanoTime() < startMeasurements) {
             try {
                 testMethod.invoke(testInstance);
-            } catch (Throwable throwable) {
+            } catch (Exception throwable) {
                 // IGNORE
             }
         } else {
             long startTimeNs = nanoTime();
             try {
                 testMethod.invoke(testInstance);
-                statisticsCalculator.addLatencyMeasurement(getCostTimeNs(startTimeNs));
-                statisticsCalculator.incrementEvaluationCount();
+
+                commonStatisticsUpdate(startTimeNs);
             } catch (Exception throwable) {
-                statisticsCalculator.incrementEvaluationCount();
+                // 错误信息更新
                 statisticsCalculator.incrementErrorCount();
-                statisticsCalculator.addLatencyMeasurement(getCostTimeNs(startTimeNs));
+
+                commonStatisticsUpdate(startTimeNs);
             }
         }
+    }
+
+    /**
+     * 通用的统计更新
+     * @param startTimeNs 开始时间
+     * @since 2.0.5
+     */
+    private void commonStatisticsUpdate(final long startTimeNs) {
+        statisticsCalculator.incrementEvaluationCount();
+        statisticsCalculator.addLatencyMeasurement(getCostTimeNs(startTimeNs));
     }
 
     /**
@@ -100,6 +125,7 @@ public class PerformanceEvaluationTask implements Runnable {
      *
      * @param startTimeNs 开始时间
      * @return 消耗的时间
+     * @since 1.0.0
      */
     private long getCostTimeNs(long startTimeNs) {
         long currentTimeNs = System.nanoTime();
@@ -113,4 +139,5 @@ public class PerformanceEvaluationTask implements Runnable {
     public void setContinue(boolean aContinue) {
         isContinue = aContinue;
     }
+
 }

@@ -29,11 +29,9 @@
 
 [变更日志](CHANGELOG.md)
 
-### v2.0.4 主要变更
+### v2.0.5 主要变更
 
-1. 移除对于 log-integration 的依赖
-
-2. 文档优化
+1. 新增内存消耗特性
 
 # 快速开始
 
@@ -49,7 +47,7 @@
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>junitperf</artifactId>
-    <version>2.0.4</version>
+    <version>2.0.5</version>
 </dependency>
 ```
 
@@ -84,7 +82,7 @@ public class HelloWorldTest {
 | threads | 执行时使用多少线程执行 | int | 1 | |
 | warmUp | 准备时间 | long | 0 | 单位：毫秒 |
 | duration | 执行时间 | long | 60_000(1分钟) | 单位：毫秒 |
-| statistics | 统计实现 | StatisticsCalculator | DefaultStatisticsCalculator |  |
+| latencyStatistics | 统计实现 | StatisticsCalculator | DefaultStatisticsCalculator |  |
 | reporter | 报告实现 | Reporter | ConsoleReporter |  |
 
 使用如下：
@@ -171,6 +169,7 @@ public class JunitPerfRequireTest {
 [INFO] 2018-01-14 22:16:31.424 [] - Min latency:   200.2112ms (Required: -1.0ms) - PASSED
 [INFO] 2018-01-14 22:16:31.424 [] - Max latency:    205.67862ms (Required: -1.0ms) - PASSED
 [INFO] 2018-01-14 22:16:31.425 [] - Ave latency:    202.97829ms (Required: -1.0ms) - PASSED
+[INFO] 2018-01-14 22:16:31.425 [] - Memory cost:   16byte
 ```
 
 ### HTML 方式
@@ -219,5 +218,6 @@ idea 用户请勾选上图中的选项
 
 # 后期 Road-MAP
 
-- [ ] 内存使用统计
+- [ x ] 内存使用统计
 
+- [ ] 支持线程的 sync 同步执行

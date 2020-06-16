@@ -34,6 +34,12 @@ public class I18nVo {
     private String max_latency;
     private String avg_latency;
 
+    /**
+     * 内存消耗
+     * @since 2.0.5
+     */
+    private String memory;
+
     public String getJunit_performance_report() {
         return junit_performance_report;
     }
@@ -160,5 +166,13 @@ public class I18nVo {
 
     public void setRequired(String required) {
         this.required = required;
+    }
+
+    public String getMemory() {
+        return memory;
+    }
+
+    public void setMemory(String memory) {
+        this.memory = memory;
     }
 }
