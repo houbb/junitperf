@@ -1,11 +1,11 @@
 package com.github.houbb.junitperf.core.report.impl;
 
+import com.github.houbb.heaven.util.lang.ConsoleUtil;
 import com.github.houbb.heaven.util.nio.PathUtil;
 import com.github.houbb.junitperf.constant.VersionConstant;
 import com.github.houbb.junitperf.core.report.Reporter;
 import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
 import com.github.houbb.junitperf.support.i18n.I18N;
-import com.github.houbb.junitperf.util.ConsoleUtil;
 import com.github.houbb.junitperf.util.FreemarkerUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -18,7 +18,6 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**

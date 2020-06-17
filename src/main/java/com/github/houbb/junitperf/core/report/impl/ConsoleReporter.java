@@ -1,5 +1,6 @@
 package com.github.houbb.junitperf.core.report.impl;
 
+import com.github.houbb.heaven.util.lang.ConsoleUtil;
 import com.github.houbb.junitperf.constant.VersionConstant;
 import com.github.houbb.junitperf.constant.enums.StatusEnum;
 import com.github.houbb.junitperf.core.report.Reporter;
@@ -8,12 +9,10 @@ import com.github.houbb.junitperf.model.evaluation.EvaluationContext;
 import com.github.houbb.junitperf.model.evaluation.component.EvaluationConfig;
 import com.github.houbb.junitperf.model.evaluation.component.EvaluationRequire;
 import com.github.houbb.junitperf.model.evaluation.component.EvaluationResult;
-import com.github.houbb.junitperf.util.ConsoleUtil;
 import org.apiguardian.api.API;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
