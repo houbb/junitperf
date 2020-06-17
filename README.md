@@ -29,15 +29,9 @@
 
 [变更日志](CHANGELOG.md)
 
-### v2.0.6 主要变更
+### v2.0.7 主要变更
 
-1. 升级 junit5 版本
-
-2. 优化页面显示
-
-3. 支持展示与方法声明顺序相同
-
-4. 日志输出优化
+1. 升级 heaven 依赖
 
 # 快速开始
 
@@ -53,7 +47,7 @@
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>junitperf</artifactId>
-    <version>2.0.6</version>
+    <version>2.0.7</version>
 </dependency>
 ```
 
