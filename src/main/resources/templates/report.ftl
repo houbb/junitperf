@@ -190,11 +190,11 @@
                     <#assign active = (context_index==0) ? string("active", "")>
                     <#if context.evaluationResult.isSuccessful()>
                         <li title="${context.methodName}" class="borderRightSuccess ${active}">
-                            <a href='#${context.methodName}'>${context.methodName}</a>
+                            <a href='#${context.methodName}'>${context.displayName}</a>
                         </li>
                     <#else>
                         <li title="${context.methodName}" class="borderRightFail ${active}">
-                            <a href='#${context.methodName}'>${context.methodName}</a>
+                            <a href='#${context.methodName}'>${context.displayName}</a>
                         </li>
                     </#if>
                 </#list>
@@ -207,7 +207,7 @@
     <#list contextData as context>
 
         <div id="${context.methodName}" class="test-method">
-            <span title="${context.methodName}" class="test-method-name">${context.methodName}</span>
+            <span title="${context.methodName}" class="test-method-name">${context.displayName}</span>
 
             <div id="${context.methodName}-img" class="test-method-img">
                 <!-- ADD scatter Chart here!! -->
