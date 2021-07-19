@@ -219,7 +219,7 @@
                         var data = google.visualization.arrayToDataTable([
                             ['Percentile', 'Latency', {role: "tooltip"}],
                             <#list 1..100 as i>
-                                [ ${i}, ${context.statisticsCalculator.getLatencyPercentile(i, milliseconds)} , "${i}% of executions ≤ ${context.statisticsCalculator.getLatencyPercentile(i, milliseconds)}ms"],
+                                [ ${i}, ${context.statisticsCalculator.getLatencyPercentile(i, milliseconds)?c} , "${i}% of executions ≤ ${context.statisticsCalculator.getLatencyPercentile(i, milliseconds)}ms"],
                             </#list>
                         ]);
                         var options = {
