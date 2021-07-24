@@ -239,3 +239,11 @@ idea 用户请勾选上图中的选项
 - [ ] 优化 html 输出中的英文，支持 I18N
 
 - [ ] 优化 html 输出中的格式，所有格式对齐
+
+# 拓展阅读
+
+[基于 junit4 分析 junitperf 源码](http://houbb.github.io/2021/07/23/junit-performance-junit4)
+
+[基于 junit5 实现 junitperf 源码分析](http://houbb.github.io/2021/07/23/junit-performance-junit5)
+
+[浅谈性能测试](http://houbb.github.io/2021/07/23/junit-performance-overview)
