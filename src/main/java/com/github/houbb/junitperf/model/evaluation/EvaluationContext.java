@@ -12,6 +12,7 @@ import com.github.houbb.junitperf.support.builder.EvaluationRequireBuilder;
 import com.github.houbb.junitperf.support.builder.EvaluationResultBuilder;
 
 import org.apiguardian.api.API;
+import org.junit.jupiter.api.DisplayName;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;
@@ -45,6 +46,12 @@ public class EvaluationContext implements Serializable {
     private final String methodName;
 
     /**
+     * 方法展示名称
+     * @see org.junit.jupiter.api.DisplayName
+     */
+    private final DisplayName displayName;
+
+    /**
      * 开始时间
      */
     private final String startTime;
@@ -76,6 +83,7 @@ public class EvaluationContext implements Serializable {
         this.testInstance = testInstance;
         this.testMethod = testMethod;
         this.methodName = testMethod.getName();
+        this.displayName =  testMethod.getAnnotation(DisplayName.class);
         this.startTime = startTime;
     }
 
@@ -137,6 +145,15 @@ public class EvaluationContext implements Serializable {
 
     public Method getTestMethod() {
         return testMethod;
+    }
+
+    /**
+     * 获取显示名称
+     * 有指定显示名称的话，使用显示名称
+     * @see DisplayName
+     */
+    public String getDisplayName() {
+        return displayName == null ? methodName : displayName.value();
     }
 
     @Override

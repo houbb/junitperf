@@ -52,7 +52,7 @@ public class PerfConfigContext implements TestTemplateInvocationContext {
     public List<Extension> getAdditionalExtensions() {
         return Collections.singletonList(
                 (TestInstancePostProcessor) (testInstance, context) -> {
-                    final Class clazz = testInstance.getClass();
+                    final Class<?> clazz = testInstance.getClass();
                     // Group test contexts by test class
                     ACTIVE_CONTEXTS.putIfAbsent(clazz, new ArrayList<>());
 
